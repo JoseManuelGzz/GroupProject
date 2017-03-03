@@ -102,6 +102,16 @@ class Mutator:
                     _list_[i] = 0
             i=i+1
         return _list_
+
+
+    def use_random_flip_2(self, _list_, alphabet, prob):
+        i = 0
+        while (i<len(_list_)-1):
+            p = random.uniform(0, 1)
+            if (p<prob):
+                _list_[i] = random.choice(alphabet)
+            i=i+1
+        return _list_
             
 
             

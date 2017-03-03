@@ -62,7 +62,7 @@ class SAAlgorithm():
 
         def run(self):
                 iterations = 0
-                max_iter = 100
+                max_iter = 1000000
 
                 #Add mutator operator
                 x = self.solution
@@ -78,9 +78,12 @@ class SAAlgorithm():
                 while iterations <= max_iter:
                         
                         #Get random new state
-                        x_temp = self.mutator.use_Random_Flip(self.solution, 0.1)
+                        x_temp = self.mutator.use_random_flip_2(self.solution, range(0,8), 0.99)
 
                         y_temp = self.obj_func.evaluate(self.dataset, x_temp)
+                        print(y_temp)
+                        print(y)
+                        print("---")
 
                         #Calculate change of energy
                         energy_change = y_temp - y
@@ -89,16 +92,16 @@ class SAAlgorithm():
                                 #accepted as the new state
                         if energy_change <= 0:
                                 x = x_temp
-                                y = self.obj_func.evaluate(self.dataset, x)
+                                y = y_temp
                         else:
                                 #The new state is accepted if a random number is less than
                                         #the calculated probability
                                 if m.exp(energy_change / c) > r.random:
                                         x = x_temp
-                                        y = self.obj_func.evaluate(self.dataset, x)
+                                        y = y_temp
                         iterations = iterations + 1
                 print("The Global Minimum value calculated after " + str(max_iter) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
-                print("From the dataset: ")
-                print(self.dataset)
+                #print("From the dataset: ")
+                #print(self.dataset)
 

@@ -6,9 +6,9 @@ from SAAlgorithm_Draft import SAAlgorithm
 from Status import Status
 from Solution import Solution
 
-columns = 3
+columns = 50
 
-dataset = Dataset(rows=10,cols = columns)
+dataset = Dataset(rows=1,cols = columns, alphabet=range(0,8))
 
 data = dataset.get_data()
 
@@ -17,7 +17,7 @@ mutator = Mutator()
 min_obj_f = MinimisingFunction()
 max_obj_f = MaximisingFunction(3)
 
-solution = Solution(cols = columns)
+solution = Solution(cols = columns, alphabet=range(0,8))
 solution_data = solution.get_solution()
 
 status = Status(100)
