@@ -8,18 +8,18 @@ class Algorithm:
 	mutOperator = Mutation()
 	currentSolution = []
 
-	def __init__(self, algorithm_type):
-		self.algorithm_type = algorithm_type
+	def __init__(self, problem_type):
+		self.problem_type = problem_type
 
 	def get_solution():
-		if algorithm_type == "CSP":
+		if problem_type == "CSP":
 			currentSolution = initRandom()
 			fCurr = evaluate(currentSolution)
 			while(true):
 				mutOperator = mutOperator.mutate(currentSolution)
 				fMutateSolution = problem.evaluate(fMutateSolution)
 
-		elif algorithm_type == "FFMSP":
+		elif problem_type == "FFMSP":
 			currentSolution = initRandom()
 			fCurr = evaluate(currentSolution)
 			while(true):

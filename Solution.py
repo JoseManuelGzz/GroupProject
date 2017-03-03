@@ -12,4 +12,7 @@ class Solution:
         Total number of lists are determined by the self.rows variable
         Number of items in each list are determined by the self.cols variable
         """
-        return random.choice(self.alphabet)
+        d = [random.choice(self.alphabet) for _ in range(self.cols)]
+        print(type(d))
+        print(d)
+        return d

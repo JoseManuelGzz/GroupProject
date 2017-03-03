@@ -1,5 +1,6 @@
 from Dataset import Dataset
-from ObjectiveFunction import ObjectiveFunction
+from ObjectiveFunction import MinimisingFunction
+from ObjectiveFunction import MaximisingFunction
 from Mutator import Mutator
 from SAAlgorithm_Draft import SAAlgorithm
 from Status import Status
@@ -13,13 +14,21 @@ data = dataset.get_data()
 
 mutator = Mutator()
 
-obj = ObjectiveFunction()
+min_obj_f = MinimisingFunction()
+max_obj_f = MaximisingFunction(3)
 
-sa = SAAlgorithm()
+solution = Solution(cols = columns)
+solution_data = solution.get_solution()
 
 status = Status(100)
 
-solution = Solution(cols = columns)
+#def _init_(self, dataset, solution, mutator, obj_func):
+
+
+sa = SAAlgorithm(data, solution_data, mutator, min_obj_f)
+
+sa.run()
+
 
 
 

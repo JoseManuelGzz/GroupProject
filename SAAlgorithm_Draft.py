@@ -8,12 +8,16 @@ from ObjectiveFunction import MinimisingFunction as minfun
 from ObjectiveFunction import MaximisingFunction as maxfun
 
 
-class SAAlgorithm:
+class SAAlgorithm():
         # def function(x):
         # 	# x^3 - x^2 + 2x - 7
         # 	return x ** 3 - x ** 2 + 2 * x - 7
 
-        def _init_(self):
+        def __init__(self, dataset, solution, mutator, obj_func):
+                self.dataset = dataset
+                self.solution = solution
+                self.mutator = mutator
+                self.obj_func = obj_func
                 pass
 
         def print_min_fun(a, b):
@@ -56,22 +60,27 @@ class SAAlgorithm:
                 return len(filter(lambda x: x >= t, distances))
 
 
-        def simulated_annealing():
+        def run(self):
                 iterations = 0
-                max_iter = 1
+                max_iter = 100
 
                 #Add mutator operator
-                x = r.randint(1, 300)
-                y = function(x)
+                x = self.solution
+                y = self.obj_func.evaluate(self.dataset, x)
+
                 c = 0.3 # Control parameter, defined by the function of Temperature
+
                 x_temp = 0
                 y_temp = 0
+
                 energy_change = 0
+
                 while iterations <= max_iter:
                         
                         #Get random new state
-                        i_temp = r.randint(1, 100)
-                        y_temp = function(x)
+                        x_temp = self.mutator.use_Random_Flip(self.solution, 0.1)
+
+                        y_temp = self.obj_func.evaluate(self.dataset, x_temp)
 
                         #Calculate change of energy
                         energy_change = y_temp - y
@@ -80,14 +89,16 @@ class SAAlgorithm:
                                 #accepted as the new state
                         if energy_change <= 0:
                                 x = x_temp
-                                y = function(x)
+                                y = self.obj_func.evaluate(self.dataset, x)
                         else:
                                 #The new state is accepted if a random number is less than
                                         #the calculated probability
                                 if m.exp(energy_change / c) > r.random:
                                         x = x_temp
-                                        y = function(x)
+                                        y = self.obj_func.evaluate(self.dataset, x)
                         iterations = iterations + 1
                 print("The Global Minimum value calculated after " + str(max_iter) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
+                print("From the dataset: ")
+                print(self.dataset)
 

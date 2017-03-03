@@ -91,7 +91,7 @@ class Mutator:
     --------------------------------------------------------------------------------
     """
     #Used only for bit lists
-    def use_Random_Flip(_list_, prob):
+    def use_Random_Flip(self, _list_, prob):
         i = 0
         while (i<len(_list_)-1):
             p = random.uniform(0, 1)

@@ -9,23 +9,25 @@ class ObjectiveFunction(object):
         pass
         
     # function that creates a list of distances from each sequence to a given string
-    def calculate_hamming_distances(self, sequences, string):
+    def calculate_hamming_distances(self, sequences, solution):
         result = []
         dist = 0
         for sequence in sequences:
         #Add 1 if elements are different, 0 if they are the same
             for i in range(len(sequence)):
-                if sequence[i] != string[i]:
+                if sequence[i] != solution[i]:
                     dist = dist + 1
                     result.append(dist)
                     dist = 0
         return result
 
 class MaximisingFunction(ObjectiveFunction):
-    def evaluate(self, sequences, proposed_solution, threshold):
+    def __init__(self, threshold):
+        self.threshold = threshold
+    def evaluate(self, sequences, proposed_solution):
         error = False
         #Validating the parameters
-        if type(sequences) != type([]):
+        """if type(sequences) != type([]):
             error = True
         elif type(sequences[0]) != type([]):
                 error = True
@@ -35,17 +37,17 @@ class MaximisingFunction(ObjectiveFunction):
                 error = True
         if error:
             raise NameError("First argument must be a list of lists, second argument must be a list,\
-                            both containing the same type, and third argument must be an integer")
+                            both containing the same type, and third argument must be an integer")"""
         
         #Obtain the list of distances between the proposed solution and the sequences
         distances = self.calculate_hamming_distances(sequences, proposed_solution)
-        return len(filter(lambda x: x >= threshold, distances))
+        return len(filter(lambda x: x >= self.threshold, distances))
 
 class MinimisingFunction(ObjectiveFunction):
     def evaluate(self, sequences, proposed_solution):
         error = False
         #Validating the parameters
-        if type(sequences) != type([]):
+        """if type(sequences) != type([]):
             error = True
         elif type(sequences[0]) != type([]):
                 error = True
@@ -55,7 +57,7 @@ class MinimisingFunction(ObjectiveFunction):
                 error = True
         if error:
             raise NameError("First argument must be a list of lists, second argument must be a list,\
-                            both containing the same type")
+                            both containing the same type")"""
         
         #Obtain the list of distances between the proposed solution and the sequences
         distances = self.calculate_hamming_distances(sequences, proposed_solution)
