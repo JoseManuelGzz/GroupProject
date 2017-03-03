@@ -1,5 +1,5 @@
 import random
-class Dataset(object):
+class Dataset:
     def __init__(self, rows=100, cols=10, alphabet=range(0,10)):
         self.rows = rows
         self.alphabet = alphabet
