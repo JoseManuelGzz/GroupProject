@@ -18,7 +18,7 @@ class ObjectiveFunction(object):
                 if sequence[i] != solution[i]:
                     dist = dist + 1
                     result.append(dist)
-                    dist = 0
+            dist = 0
         return result
 
 class MaximisingFunction(ObjectiveFunction):
@@ -61,7 +61,8 @@ class MinimisingFunction(ObjectiveFunction):
         
         #Obtain the list of distances between the proposed solution and the sequences
         distances = self.calculate_hamming_distances(sequences, proposed_solution)
-                
+        print("The distances are: ")
+        print(distances)
         return max(distances)
 
 
