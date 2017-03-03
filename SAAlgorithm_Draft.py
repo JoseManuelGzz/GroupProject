@@ -78,7 +78,7 @@ class SAAlgorithm():
                 while iterations <= max_iter:
                         
                         #Get random new state
-                        x_temp = self.mutator.use_random_flip_2(self.solution, range(0,8), 0.99)
+                        x_temp = self.mutator.use_random_flip_2(self.solution, range(0,4), 0.99)
 
                         y_temp = self.obj_func.evaluate(self.dataset, x_temp)
                         print(y_temp)
