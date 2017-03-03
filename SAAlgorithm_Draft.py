@@ -56,8 +56,8 @@ def simulated_annealing():
 	max_iter = 1
 
 	#Add mutator operator
-	x = r.randint(1, 300)
-	y = function(x)
+    x = r.randint(1, 300) #Initial Proposed solution
+    y = function(x) # Evaluate with the objective function
 	c = 0.3 # Control parameter, defined by the function of Temperature
 	x_temp = 0
 	y_temp = 0
@@ -65,8 +65,8 @@ def simulated_annealing():
 	while iterations <= max_iter:
 		
 		#Get random new state
-		i_temp = r.randint(1, 100)
-		y_temp = function(x)
+        x_temp = r.randint(1, 100) # mutate() to get mutated solution
+        y_temp = function(x_temp) #Evaluate mutation with the prposed solution
 
 		#Calculate change of energy
 		energy_change = y_temp - y
@@ -75,7 +75,7 @@ def simulated_annealing():
 			#accepted as the new state
 		if energy_change <= 0:
 			x = x_temp
-			y = function(x)
+			y = y_temp
 		else:
 			#The new state is accepted if a random number is less than
 				#the calculated probability
