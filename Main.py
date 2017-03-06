@@ -8,7 +8,7 @@ from Solution import Solution
 
 columns = 10
 
-dataset = Dataset(rows=1,cols = columns, alphabet=range(0,4))
+dataset = Dataset(rows=5,cols = columns, alphabet=range(0,4))
 
 data = dataset.get_data()
 

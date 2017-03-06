@@ -13,6 +13,8 @@ class SAAlgorithm():
         # 	# x^3 - x^2 + 2x - 7
         # 	return x ** 3 - x ** 2 + 2 * x - 7
 
+        alpha = 0.95 #Value for cooling schedule
+
         def __init__(self, dataset, solution, mutator, obj_func):
                 self.dataset = dataset
                 self.solution = solution
@@ -59,16 +61,19 @@ class SAAlgorithm():
         def ffmsp_cost_function(distances, t):
                 return len(filter(lambda x: x >= t, distances))
 
+        def cooling_value(self, current_c, max_iterat, curr_iter):
+                return ((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
+
 
         def run(self):
                 iterations = 0
-                max_iter = 1000000
+                max_iter = 50
 
                 #Add mutator operator
                 x = self.solution
                 y = self.obj_func.evaluate(self.dataset, x)
 
-                c = 0.3 # Control parameter, defined by the function of Temperature
+                c = 1 # Control parameter, defined by the function of Temperature
 
                 x_temp = 0
                 y_temp = 0
@@ -100,6 +105,8 @@ class SAAlgorithm():
                                         x = x_temp
                                         y = y_temp
                         iterations = iterations + 1
+                        c = self.cooling_value(c, max_iter, iterations)
+                        print(c)
                 print("The Global Minimum value calculated after " + str(max_iter) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
                 #print("From the dataset: ")
