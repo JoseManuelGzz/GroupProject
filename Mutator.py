@@ -38,8 +38,8 @@ import string
 
 class Mutator:
 
-    def _init_(self):
-        pass
+    def __init__(self, dataset):
+        self.dataset = dataset
     
 
 
@@ -104,12 +104,14 @@ class Mutator:
         return _list_
 
 
-    def use_random_flip_2(self, _list_, alphabet, prob):
+    def use_random_flip_2(self, _list_, prob):
         i = 0
+        alphabet_per_column = self.dataset.get_alphabet_per_column()
         while (i < len(_list_)):
+            print(alphabet_per_column[i])
             p = random.uniform(0, 1)
             if (p < prob):
-                _list_[i] = random.choice(alphabet)
+                _list_[i] = random.choice(alphabet_per_column[i])
             i=i+1
         return _list_
             

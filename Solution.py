@@ -1,8 +1,7 @@
 import random
 class Solution:
-    def __init__(self, cols=10, alphabet=range(0,10)):
-        self.alphabet = alphabet
-        self.cols = cols
+    def __init__(self, dataset):
+        self.dataset = dataset
         
     def get_solution(self):
         """
@@ -12,7 +11,8 @@ class Solution:
         Total number of lists are determined by the self.rows variable
         Number of items in each list are determined by the self.cols variable
         """
-        d = [random.choice(self.alphabet) for _ in range(self.cols)]
-        print(type(d))
-        print(d)
-        return d
+        return self.dataset.get_most_common_char_column()
+
+    def get_solutions(self):
+        pass
+

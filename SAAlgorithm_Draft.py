@@ -62,12 +62,12 @@ class SAAlgorithm():
                 return len(filter(lambda x: x >= t, distances))
 
         def cooling_value(self, current_c, max_iterat, curr_iter):
-                return 0.95 * current_c#((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
+                return 0.99 * current_c#((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
 
 
         def run(self):
                 iterations = 0
-                max_iter = 100000
+                max_iter = 1000000
 
                 #Add mutator operator
                 x = self.solution
@@ -80,15 +80,16 @@ class SAAlgorithm():
 
                 energy_change = 0
 
-                while iterations <= max_iter:
+                while iterations <= max_iter: #and c >= 0.005:
                         
+
                         #Get random new state
-                        x_temp = self.mutator.use_random_flip_2(self.solution, range(0,4), 0.2)
+                        x_temp = self.mutator.use_random_flip_2(self.solution, 0.3)
 
                         y_temp = self.obj_func.evaluate(self.dataset, x_temp)
-                        print(y_temp)
-                        print(y)
-                        print("---")
+                        #print(y_temp)
+                        #print(y)
+                        #print("---")
 
                         #Calculate change of energy
                         energy_change = y_temp - y
@@ -101,18 +102,19 @@ class SAAlgorithm():
                         else:
                                 #The new state is accepted if a random number is less than
                                         #the calculated probability
-                                print("The values for c and energy change")
-                                print(c)
-                                print(energy_change)
-                                print("----------")
+                                #print("The values for c and energy change")
+                                #print(c)
+                                #print(energy_change)
+                                #print("----------")
                                 if m.exp(energy_change / c) > r.random():
                                         x = x_temp
                                         y = y_temp
                         iterations = iterations + 1
-                        c = self.cooling_value(c, max_iter, iterations)
-                        print(c)
+                        if c >= 0.007:
+                                c = self.cooling_value(c, max_iter, iterations)
+                        #print(c)
 
-                print("The Global Minimum value calculated after " + str(max_iter) + " iterations is")
+                print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
                 #print("From the dataset: ")
                 #print(self.dataset)

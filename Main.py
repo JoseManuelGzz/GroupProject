@@ -12,13 +12,20 @@ dataset = Dataset(rows=5,cols = columns, alphabet=range(0,4))
 
 data = dataset.get_data()
 
-mutator = Mutator()
+mutator = Mutator(dataset)
+
+solution = Solution(dataset)
+solution_data = solution.get_solution()
+
+print(solution_data)
+x = mutator.use_random_flip_2(solution_data, 0.3)
+print(x)
+
+"""
 
 min_obj_f = MinimisingFunction()
 max_obj_f = MaximisingFunction(3)
 
-solution = Solution(cols = columns, alphabet=range(0,4))
-solution_data = solution.get_solution()
 
 status = Status(100)
 
@@ -28,7 +35,7 @@ status = Status(100)
 sa = SAAlgorithm(data, solution_data, mutator, min_obj_f)
 
 sa.run()
-
+"""
 
 
 
