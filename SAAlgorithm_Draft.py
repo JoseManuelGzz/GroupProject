@@ -15,12 +15,12 @@ class SAAlgorithm():
 
         alpha = 0.95 #Value for cooling schedule
 
-        def __init__(self, dataset, solution, mutator, obj_func):
+        def __init__(self, dataset, solution, mutator, obj_func, status):
                 self.dataset = dataset
                 self.solution = solution
                 self.mutator = mutator
                 self.obj_func = obj_func
-                pass
+                self.status = status
 
         def print_min_fun(a, b):
                 y_min = 100000
@@ -61,19 +61,22 @@ class SAAlgorithm():
         def ffmsp_cost_function(distances, t):
                 return len(filter(lambda x: x >= t, distances))
 
-        def cooling_value(self, current_c, max_iterat, curr_iter):
-                return 0.99 * current_c#((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
+        def cooling_value(self, alpha, current_c, max_iterat, curr_iter):
+                return alpha * current_c#((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
 
 
-        def run(self):
+        def run(self, alpha, initial_c):
                 iterations = 0
-                max_iter = 1000000
+                max_iter = self.status.get_max_iterations()
+
+                self.status.set_alpha_value_sa(alpha)
 
                 #Add mutator operator
                 x = self.solution
                 y = self.obj_func.evaluate(self.dataset, x)
+                self.status.add_function_calls()
 
-                c = 200 # Control parameter, defined by the function of Temperature
+                c = initial_c # Control parameter, defined by the function of Temperature
 
                 x_temp = 0
                 y_temp = 0
@@ -82,11 +85,20 @@ class SAAlgorithm():
 
                 while iterations <= max_iter: #and c >= 0.005:
                         
+                        self.status.add_c_sa_parameters(c)
 
                         #Get random new state
                         x_temp = self.mutator.use_random_flip_2(self.solution, 0.3)
 
                         y_temp = self.obj_func.evaluate(self.dataset, x_temp)
+                        self.status.add_function_calls()
+
+                        iterations = iterations + 1
+                        self.status.add_iteration()
+
+                        current_entry = [iterations, self.status.get_function_calls(), y, y_temp]
+                        self.status.add_add_solution_record_entry(current_entry)
+
                         #print(y_temp)
                         #print(y)
                         #print("---")
@@ -109,13 +121,24 @@ class SAAlgorithm():
                                 if m.exp(energy_change / c) > r.random():
                                         x = x_temp
                                         y = y_temp
-                        iterations = iterations + 1
+
+
+
                         if c >= 0.007:
-                                c = self.cooling_value(c, max_iter, iterations)
+                                c = self.cooling_value(alpha, c, max_iter, iterations)
                         #print(c)
+
+                        #Update status parameters
+
+
+
+                        #Add entry to solution_record
+
 
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
                 #print("From the dataset: ")
                 #print(self.dataset)
+
+                return self.status
 

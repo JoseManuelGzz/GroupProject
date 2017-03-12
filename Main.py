@@ -8,34 +8,47 @@ from Solution import Solution
 
 columns = 10
 
-dataset = Dataset(rows=5,cols = columns, alphabet=range(0,4))
+rows = 5
+
+max_iterations = 100
+
+alphabet=range(0,4)
+
+alpha = 0.95
+
+initial_c = 200
+
+status = Status(max_iterations, rows, columns, len(alphabet))
+
+dataset = Dataset(rows= rows, cols = columns, alphabet=alphabet)
+
 
 data = dataset.get_data()
 
 mutator = Mutator(dataset)
 
 solution = Solution(dataset)
+
 solution_data = solution.get_solution()
 
+"""
 print(solution_data)
 x = mutator.use_random_flip_2(solution_data, 0.3)
 print(x)
-
 """
 
 min_obj_f = MinimisingFunction()
 max_obj_f = MaximisingFunction(3)
 
 
-status = Status(100)
-
 #def _init_(self, dataset, solution, mutator, obj_func):
 
 
-sa = SAAlgorithm(data, solution_data, mutator, min_obj_f)
+sa = SAAlgorithm(data, solution_data, mutator, min_obj_f, status)
 
-sa.run()
-"""
+status = sa.run(alpha, initial_c)
+
+print(status.get_solution_record())
 
 
 
