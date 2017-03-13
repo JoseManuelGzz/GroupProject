@@ -41,7 +41,7 @@ class MaximisingFunction(ObjectiveFunction):
         
         #Obtain the list of distances between the proposed solution and the sequences
         distances = self.calculate_hamming_distances(sequences, proposed_solution)
-        return len(filter(lambda x: x >= self.threshold, distances))
+        return -1 * len(filter(lambda x: x >= self.threshold, distances))
 
 class MinimisingFunction(ObjectiveFunction):
     def evaluate(self, sequences, proposed_solution):

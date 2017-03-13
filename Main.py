@@ -45,8 +45,8 @@ max_obj_f = MaximisingFunction(0.75 * columns)
 #def _init_(self, dataset, solution, mutator, obj_func):
 
 
-#sa = SAAlgorithm(data, solution_data, mutator, min_obj_f, status)
-
+sa = SAAlgorithm(data, solution_data, mutator, min_obj_f, status)
+"""
 solution_data = solution.get_solution('ffmsp')
 
 sa_ffmsp = SAAlgorithm(data, solution_data, mutator, max_obj_f, status)
@@ -56,7 +56,7 @@ status.save_to_file('csp_run.csv')
 """
 status = sa_ffmsp.run_ffmsp(alpha, initial_c)
 status.save_to_file('ffmsp_run.csv')
-
+"""
 
 
 

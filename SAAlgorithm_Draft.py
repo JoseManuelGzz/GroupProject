@@ -118,7 +118,7 @@ class SAAlgorithm():
                                 #print(c)
                                 #print(energy_change)
                                 #print("----------")
-                                if m.exp(energy_change / c) > r.random():
+                                if m.exp(energy_change / c) < r.random():
                                         x = x_temp
                                         y = y_temp
 
@@ -172,7 +172,7 @@ class SAAlgorithm():
                 print(y)
                 ######
 
-                c = initial_c # Control parameter, defined by the function of Temperature
+                c = float(initial_c) # Control parameter, defined by the function of Temperature
 
                 #####
                 print("------------4----")
@@ -247,7 +247,7 @@ class SAAlgorithm():
                                 # print("Energy Change " + str(energy_change))
                                 # print("C value " + str(c))
                                 # print("Division " + str(energy_change / (c*1.0)))
-                                if m.exp(energy_change / (c*1.0)) > r.random():
+                                if m.exp(energy_change / (c)) < r.random():
                                         #####
                                         if iterations < 3:
                                                 print("------------9----")
