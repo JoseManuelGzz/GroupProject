@@ -1,4 +1,4 @@
-
+import csv
 class Status:
 
 
@@ -45,7 +45,7 @@ class Status:
         def add_c_sa_parameters(self, c_value):
                 self.sa_parameters["c"].append(c_value)
 
-        def add_add_solution_record_entry(self, entry):
+        def add_solution_record_entry(self, entry):
                 self.solution_record.append(entry)
 
         def set_alpha_value_sa(self, alpha):
@@ -62,3 +62,17 @@ class Status:
 
         def get_solution_record(self):
                 return self.solution_record
+
+        def save_to_file(self, file_name):
+                with open(file_name, "wb") as out_file:
+                        csv_obj = csv.writer(out_file)
+                        csv_obj.writerows(self.solution_record)
+
+        def load_from_file(self, file_name):
+                result = []
+                with open(file_name, "rb") as in_file:
+                        file_reader = csv.reader(in_file, delimiter=',')
+                        for row in file_reader:
+                                result.append(row)
+                self.solution_record = result
+

@@ -108,7 +108,7 @@ class Mutator:
         i = 0
         alphabet_per_column = self.dataset.get_alphabet_per_column()
         while (i < len(_list_)):
-            print(alphabet_per_column[i])
+            #print(alphabet_per_column[i])
             p = random.uniform(0, 1)
             if (p < prob):
                 _list_[i] = random.choice(alphabet_per_column[i])

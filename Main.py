@@ -10,7 +10,7 @@ columns = 10
 
 rows = 5
 
-max_iterations = 100
+max_iterations = 10000
 
 alphabet=range(0,4)
 
@@ -29,7 +29,8 @@ mutator = Mutator(dataset)
 
 solution = Solution(dataset)
 
-solution_data = solution.get_solution()
+solution_data = solution.get_solution('csp')
+
 
 """
 print(solution_data)
@@ -44,11 +45,19 @@ max_obj_f = MaximisingFunction(3)
 #def _init_(self, dataset, solution, mutator, obj_func):
 
 
-sa = SAAlgorithm(data, solution_data, mutator, min_obj_f, status)
+#sa = SAAlgorithm(data, solution_data, mutator, min_obj_f, status)
 
-status = sa.run(alpha, initial_c)
+solution_data = solution.get_solution('ffmsp')
+print(solution_data)
+sa_ffmsp = SAAlgorithm(data, solution_data, mutator, max_obj_f, status)
+"""
+status = sa.run_csp(alpha, initial_c)
+status.save_to_file('csp_run.csv')
+"""
+status = sa_ffmsp.run_ffmsp(alpha, initial_c)
+status.save_to_file('ffmsp_run.csv')
 
-print(status.get_solution_record())
+
 
 
 
