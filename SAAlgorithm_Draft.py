@@ -145,7 +145,13 @@ class SAAlgorithm():
         def run_ffmsp(self, alpha, initial_c):
                 iterations = 0
                 max_iter = self.status.get_max_iterations()
+                ###################
+                print("------------1----")
+                print("Dataset")
+                print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+                print("-------")
 
+                ###################
                 self.status.set_alpha_value_sa(alpha)
 
                 #Add mutator operator
@@ -153,8 +159,27 @@ class SAAlgorithm():
                 y = self.obj_func.evaluate(self.dataset, x)
                 self.status.add_function_calls()
 
+                ######
+                print("------------2----")
+                print("Initial Solution")
+                solution_print = "    "
+                for ch in x:
+                        solution_print = solution_print + str(ch)
+                        solution_print = solution_print + "  "
+                print(solution_print)
+                print("------------3----")
+                print("Initial solution evaluation")
+                print(y)
+                ######
+
                 c = initial_c # Control parameter, defined by the function of Temperature
 
+                #####
+                print("------------4----")
+                print("Initial c")
+                print(c)
+                #####
+                
                 x_temp = 0
                 y_temp = 0
 
@@ -170,6 +195,16 @@ class SAAlgorithm():
                         y_temp = self.obj_func.evaluate(self.dataset, x_temp)
                         self.status.add_function_calls()
 
+                        #####
+                        
+                        if iterations < 3:
+                                print("------------5----")
+                                print("Mutated Solution:")
+                                print(x_temp)
+                                print("Evaluated solution:")
+                                print(y_temp)
+                        #####
+
                         iterations = iterations + 1
                         self.status.add_iteration()
 
@@ -182,26 +217,53 @@ class SAAlgorithm():
 
                         #Calculate change of energy
                         energy_change = y - y_temp
+                        #####
+                        if iterations < 3:
+                                print("------------6----")
+                                print("f(current_sol) - f(new_sol):")
+                                print(energy_change)
+                        #####
 
                         #Determining if the random state should be
                                 #accepted as the new state
                         if energy_change <= 0:
                                 x = x_temp
                                 y = y_temp
+                                #####
+                                if iterations < 3:
+                                        print("------------7----")
+                                        print("Improvement! Changing current sol.")
+                                #####
                         else:
                                 #The new state is accepted if a random number is less than
                                         #the calculated probability
-                                #print("The values for c and energy change")
-                                #print(c)
-                                #print(energy_change)
-                                #print("----------")
-                                if m.exp(energy_change / c) > r.random():
+                                
+                                #####
+                                if iterations < 3:
+                                        print("------------8----")
+                                        print("No improvement, updating if exp(energy_change/c) > random()")
+                                #####
+
+                                # print("Energy Change " + str(energy_change))
+                                # print("C value " + str(c))
+                                # print("Division " + str(energy_change / (c*1.0)))
+                                if m.exp(energy_change / (c*1.0)) > r.random():
+                                        #####
+                                        if iterations < 3:
+                                                print("------------9----")
+                                                print("Updating sol. even without improv.")
+                                        #####
                                         x = x_temp
                                         y = y_temp
 
 
 
-                        if c >= 0.007:
+                        if c >= 0.05:
+                                #####
+                                if iterations < 3:
+                                        print("------------10----")
+                                        print("Updating c value with " + str(self.alpha) + "*current_c")
+                                #####
                                 c = self.cooling_value(alpha, c, max_iter, iterations)
                         #print(c)
 

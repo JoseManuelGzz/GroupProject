@@ -6,13 +6,13 @@ from SAAlgorithm_Draft import SAAlgorithm
 from Status import Status
 from Solution import Solution
 
-columns = 10
+columns = 10 #300
 
-rows = 5
+rows = 7 #100
 
-max_iterations = 10000
+max_iterations = 1000 #5000
 
-alphabet=range(0,4)
+alphabet=range(0,5)
 
 alpha = 0.95
 
@@ -39,7 +39,7 @@ print(x)
 """
 
 min_obj_f = MinimisingFunction()
-max_obj_f = MaximisingFunction(3)
+max_obj_f = MaximisingFunction(0.75 * columns)
 
 
 #def _init_(self, dataset, solution, mutator, obj_func):
@@ -48,7 +48,7 @@ max_obj_f = MaximisingFunction(3)
 #sa = SAAlgorithm(data, solution_data, mutator, min_obj_f, status)
 
 solution_data = solution.get_solution('ffmsp')
-print(solution_data)
+
 sa_ffmsp = SAAlgorithm(data, solution_data, mutator, max_obj_f, status)
 """
 status = sa.run_csp(alpha, initial_c)

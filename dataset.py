@@ -11,8 +11,8 @@ class Dataset:
         for _ in range(self.rows):
             self.d.append([random.choice(self.alphabet) for _ in range(self.cols)])
 
-        print("Dataset")
-        print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.d]))
+        #print("Dataset")
+        #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.d]))
 
         #Building the array with the sets of alphabet in each column
         #and
