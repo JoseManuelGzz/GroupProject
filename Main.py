@@ -5,12 +5,13 @@ from Mutator import Mutator
 from SAAlgorithm_Draft import SAAlgorithm
 from Status import Status
 from Solution import Solution
+from Figures import Figure
 
 columns = 10 #300
 
 rows = 7 #100
 
-max_iterations = 1000 #5000
+max_iterations = 5000 #5000
 
 alphabet=range(0,5)
 
@@ -56,8 +57,12 @@ status.save_to_file('csp_run.csv')
 """
 status = sa_ffmsp.run_ffmsp(alpha, initial_c)
 status.save_to_file('ffmsp_run.csv')
-"""
 
+"""
+figure = Figure(status)
+figure.get_best_result_plot()
+#figure.save_best_result_plot("best_result.png")
+figure.get_current_result_plot()
 
 
 
