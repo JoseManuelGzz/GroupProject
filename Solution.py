@@ -7,6 +7,7 @@ from collections import Counter
 class Solution:
     def __init__(self, dataset):
         self.dataset = dataset
+
     
     """
         <func_name>
@@ -17,6 +18,10 @@ class Solution:
                         <description>
 
     """   
+
+
+        
+
     def get_solution(self, solution_type):
         """
         returns a list of lists.
@@ -36,6 +41,14 @@ class Solution:
                 result.append(element)
             return result
 
-    def get_solutions(self):
-        pass
+    def get_solutions(self, rows):
+        solutions = [[]]  
+	self.rows = rows
+	chrom_length = self.dataset.cols
+    	for i in range(rows):  
+            temp = []  
+            for j in range(chrom_length):  
+                temp.append(random.randint(0, 3))  
+                solutions.append(temp)  
+        return solutions[1:]
 
