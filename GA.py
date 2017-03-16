@@ -1,55 +1,43 @@
-from Mutator import Mutator
-#import matplotlib.pyplot as plt  
 import math 
 import random
 
 class GA:
     # create the input string
 
-    def __init__(self, dataset, solution, mutator, obj_func, rows, chrom_length):
+    def __init__(self, dataset, solution, mutator, obj_func, status):
         self.dataset = dataset
         self.results = [[]]  
         self.solution = solution
         self.mutator = mutator
         self.obj_func = obj_func
-        self.rows = rows
-        self.chrom_length = chrom_length
-
-    #def print_min_fun(a, b):
-#        return len(filter(lambda x: x >= t, distances))
+        self.status = status
 
 
         
       
     # compute the fit value by objective object
       
-    def calobjValue(self):  
+    def csp_fit_value(self):  
         temp1 = self.solution
         data = self.dataset
-        obj_value = []
-        chrom_length = 10  
+        fit_value = []
         for i in range(len(temp1)):  
-            obj_value_ = 11 - self.obj_func.evaluate(data,temp1[i])
-            obj_value.append(obj_value_)
-        return obj_value
-     
-    # choose the value more than min
-      
-    def calfitValue(self, obj_value):  
-        fit_value = []  
-        c_min = 0  
-        for i in range(len(obj_value)):  
-            if(obj_value[i] > _min):  
-                temp = obj_value[i]  
-            else:  
-                temp = 0.0  
-            fit_value.append(temp)  
+            fit_value_ = 11 - self.obj_func.evaluate(data,temp1[i])
+            fit_value.append(fit_value_)
         return fit_value
 
 
 
-      
-    import random  
+    def ffmsp_fit_value(self):  
+        temp1 = self.solution
+        data = self.dataset
+        fit_value = []
+        for i in range(len(temp1)):
+            fit_value_ = self.obj_func.evaluate(data,temp1[i])
+            fit_value.append(fit_value_)
+        return fit_value
+    
+
       
     # compute the sum of fit_value
 
@@ -58,6 +46,8 @@ class GA:
         for i in range(len(fit_value)):  
             total += fit_value[i]  
         return total  
+
+
       
     # compute the probability of fit_value
      
@@ -72,21 +62,16 @@ class GA:
             fit_value[len(fit_value)-1] = 1
 
 
-    def mutation(self, pm):  
-        px = len(self.solution)  
-        py = len(self.solution[0])  
-          
-        for i in range(px):  
-            if(random.random() < pm):  
-                mpoint = random.randint(0, py-1)
-                self.solution[i][mpoint] == random.randint(0,4)
-                #if(self.solution[i][mpoint] == 1):  
-                    #self.solution[i][mpoint] = 0  
-                #else:  
-                    #self.solution[i][mpoint] = 1
 
+    # mutate the solutions
+    def mutation(self, probability_of_mutation):  
+        solution_length = len(self.solution)  
+        for i in range(solution_length): 
+	    self.mutator.use_random_flip_2(self.solution[i], probability_of_mutation)  
+		
+                
 
-    # select the string which probobility left is high
+    # select the string which probibility left is high
       
     def selection(self, fit_value):  
         newfit_value = []  
@@ -115,11 +100,6 @@ class GA:
 
 
 
-    
-            
-
-
-
     # compulate
       
     def crossover(self, pc):  
@@ -136,41 +116,129 @@ class GA:
                 self.solution[i] = temp1  
                 self.solution[i+1] = temp2
 
+    # find the best sequence of solutions
 
     def best(self, fit_value):
         return self.solution[fit_value.index(max(fit_value))], max(fit_value)
         
 
+    # objective problem is CSP
 
-
-
-
-    def run(self):
-        
-        solution_size = self.rows
-        chrom_length = self.chrom_length     
-        pc = 0.3           
-        pm = 0.01            
-        dataset = self.dataset
-        fit_value = []       
-        fit_mean = []
-        solution = self.solution
-         
+    def run(self, iterations, probability_of_mutation = 0.1):    
+        #probability_of_crossover = 0.3           
+        #probability_of_mutation = 0.01            
+        fit_value = []
+        self.status.add_function_calls()
+	self.status.set_iterations_value_ga(iterations)
+	self.status.set_probability_of_mutation_ga(probability_of_mutation)
+	###################
+	print("------------1----")
+	print("Dataset: ")
+        print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+	#print(self.dataset)
              
-        for i in range(solution_size):  
-            fit_value = self.calobjValue()             
+	
+	
+	###################
+	print("------------2----")
+	print("Initial Solutions")
+	print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.solution]))
+
+	###################
+	print("------------3----")
+	fit_value0 = self.csp_fit_value()
+	best_individual, best_fit = self.best(fit_value0)
+	print("Best initial solution: ")
+	print(best_individual)
+	print("Evaluation of best solution: ")
+	print(11 - best_fit)
+
+	###################
+	print("------------4----")
+        print("Iterations: ")
+	print(iterations)
+
+
+
+	###################
+        for i in range(iterations):  
+            fit_value = self.csp_fit_value()             
             best_individual, best_fit = self.best(fit_value)
             self.results.append([11-best_fit, best_individual]) 
             self.selection(fit_value)      
-            self.crossover(pc)     
-            self.mutation(pm)
-
-        self.results = self.results[1:]  
-        self.results.sort()  
-          
-  
-        #print self.results
-        print self.results[0]
+            #self.crossover(probability_of_crossover)     
+            self.mutation(probability_of_mutation)
         
+	###################
+  	self.results = self.results[1:]  
+        self.results.sort()
+        self.status.add_solution_record_entry(self.results)
+        #print self.results
+	print("Result: ")
+	print("   Solution: ")
+	print self.results[0][1]
+	print("   Evaluation: ")
+	print(self.results[0][0])
+        #print self.results[0]
+	return self.status
 
 
+
+    # objective problem is FFMSP
+
+    def run_ffmsp(self, iterations, probability_of_mutation = 0.1):     
+        #probability_of_crossover = 0.3           
+        #probability_of_mutation = 0.01            
+        fit_value = []       
+	self.status.add_function_calls()
+	self.status.set_iterations_value_ga(iterations)
+	self.status.set_probability_of_mutation_ga(probability_of_mutation)
+	###################
+	print("------------1----")
+	print("Dataset: ")
+        print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+             
+	
+	
+	###################
+	print("------------2----")
+	print("Initial Solutions")
+	print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+
+	###################
+	print("------------3----")
+	fit_value = self.ffmsp_fit_value()
+	best_individual, best_fit = self.best(fit_value)
+	print("Best initial solution: ")
+	print(best_individual)
+	print("Evaluation of best solution: ")
+	print(best_fit)
+
+	###################
+	print("------------4----")
+        print("Iterations: ")
+	print(iterations)
+
+
+
+	###################
+        for i in range(iterations):  
+            fit_value = self.ffmsp_fit_value()             
+            best_individual, best_fit = self.best(fit_value)
+            #self.results.append([best_fit, best_individual]) 
+            self.selection(fit_value)      
+            #self.crossover(probability_of_crossover)     
+            self.mutation(probability_of_mutation)
+        
+	###################
+  	self.results = self.results[1:]  
+        self.results.sort()
+        self.status.add_solution_record_entry(self.results)
+        #print self.results
+	print("Result: ")
+	print("   Solution: ")
+	print(self.results[0][1])
+	print("   Evaluation: ")
+	print(self.results[0][0])
+        #print self.results[0]
+	return self.status
