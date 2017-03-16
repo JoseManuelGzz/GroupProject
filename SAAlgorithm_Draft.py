@@ -152,7 +152,8 @@ class SAAlgorithm():
 
                         #Add entry to solution_record
 
-
+                if y < 0:
+                        y *= -1
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
                 #print("From the dataset: ")
