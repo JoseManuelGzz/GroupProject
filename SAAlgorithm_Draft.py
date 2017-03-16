@@ -1,11 +1,12 @@
-
+"""
+<class name>: <class description/objective>
+        (?)<subclass name>: <subclass description/objective>
+"""
 
 # Initial implementation of the Simulated Annealing Algorithm
 
 import random as r
 import math as m
-from ObjectiveFunction import MinimisingFunction as minfun
-from ObjectiveFunction import MaximisingFunction as maxfun
 
 
 class SAAlgorithm():
@@ -61,11 +62,28 @@ class SAAlgorithm():
         def ffmsp_cost_function(distances, t):
                 return len(filter(lambda x: x >= t, distances))
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def cooling_value(self, alpha, current_c, max_iterat, curr_iter):
                 return alpha * current_c#((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
 
-        def run_csp(self, alpha, initial_c):
+        """
+        def run(self, alpha, initial_c):
                 iterations = 0
                 max_iter = self.status.get_max_iterations()
 
@@ -142,142 +160,142 @@ class SAAlgorithm():
 
                 return self.status
 
-        def run_ffmsp(self, alpha, initial_c):
-                iterations = 0
-                max_iter = self.status.get_max_iterations()
-                ###################
-                print("------------1----")
-                print("Dataset")
-                print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
-                print("-------")
+        # def run_ffmsp(self, alpha, initial_c):
+        #         iterations = 0
+        #         max_iter = self.status.get_max_iterations()
+        #         ###################
+        #         print("------------1----")
+        #         print("Dataset")
+        #         print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+        #         print("-------")
 
-                ###################
-                self.status.set_alpha_value_sa(alpha)
+        #         ###################
+        #         self.status.set_alpha_value_sa(alpha)
 
-                #Add mutator operator
-                x = self.solution
-                y = self.obj_func.evaluate(self.dataset, x)
-                self.status.add_function_calls()
+        #         #Add mutator operator
+        #         x = self.solution
+        #         y = self.obj_func.evaluate(self.dataset, x)
+        #         self.status.add_function_calls()
 
-                ######
-                print("------------2----")
-                print("Initial Solution")
-                solution_print = "    "
-                for ch in x:
-                        solution_print = solution_print + str(ch)
-                        solution_print = solution_print + "  "
-                print(solution_print)
-                print("------------3----")
-                print("Initial solution evaluation")
-                print(y)
-                ######
+        #         ######
+        #         print("------------2----")
+        #         print("Initial Solution")
+        #         solution_print = "    "
+        #         for ch in x:
+        #                 solution_print = solution_print + str(ch)
+        #                 solution_print = solution_print + "  "
+        #         print(solution_print)
+        #         print("------------3----")
+        #         print("Initial solution evaluation")
+        #         print(y)
+        #         ######
 
-                c = float(initial_c) # Control parameter, defined by the function of Temperature
+        #         c = float(initial_c) # Control parameter, defined by the function of Temperature
 
-                #####
-                print("------------4----")
-                print("Initial c")
-                print(c)
-                #####
+        #         #####
+        #         print("------------4----")
+        #         print("Initial c")
+        #         print(c)
+        #         #####
                 
-                x_temp = 0
-                y_temp = 0
+        #         x_temp = 0
+        #         y_temp = 0
 
-                energy_change = 0
+        #         energy_change = 0
 
-                while iterations <= max_iter: #and c >= 0.005:
+        #         while iterations <= max_iter: #and c >= 0.005:
                         
-                        self.status.add_c_sa_parameters(c)
+        #                 self.status.add_c_sa_parameters(c)
 
-                        #Get random new state
-                        x_temp = self.mutator.use_random_flip_2(self.solution, 0.3)
+        #                 #Get random new state
+        #                 x_temp = self.mutator.use_random_flip_2(self.solution, 0.3)
 
-                        y_temp = self.obj_func.evaluate(self.dataset, x_temp)
-                        self.status.add_function_calls()
+        #                 y_temp = self.obj_func.evaluate(self.dataset, x_temp)
+        #                 self.status.add_function_calls()
 
-                        #####
+        #                 #####
                         
-                        if iterations < 3:
-                                print("------------5----")
-                                print("Mutated Solution:")
-                                print(x_temp)
-                                print("Evaluated solution:")
-                                print(y_temp)
-                        #####
+        #                 if iterations < 3:
+        #                         print("------------5----")
+        #                         print("Mutated Solution:")
+        #                         print(x_temp)
+        #                         print("Evaluated solution:")
+        #                         print(y_temp)
+        #                 #####
 
-                        iterations = iterations + 1
-                        self.status.add_iteration()
+        #                 iterations = iterations + 1
+        #                 self.status.add_iteration()
 
-                        current_entry = [iterations, self.status.get_function_calls(), y, y_temp]
-                        self.status.add_solution_record_entry(current_entry)
+        #                 current_entry = [iterations, self.status.get_function_calls(), y, y_temp]
+        #                 self.status.add_solution_record_entry(current_entry)
 
-                        #print(y_temp)
-                        #print(y)
-                        #print("---")
+        #                 #print(y_temp)
+        #                 #print(y)
+        #                 #print("---")
 
-                        #Calculate change of energy
-                        energy_change = y - y_temp
-                        #####
-                        if iterations < 3:
-                                print("------------6----")
-                                print("f(current_sol) - f(new_sol):")
-                                print(energy_change)
-                        #####
+        #                 #Calculate change of energy
+        #                 energy_change = y - y_temp
+        #                 #####
+        #                 if iterations < 3:
+        #                         print("------------6----")
+        #                         print("f(current_sol) - f(new_sol):")
+        #                         print(energy_change)
+        #                 #####
 
-                        #Determining if the random state should be
-                                #accepted as the new state
-                        if energy_change <= 0:
-                                x = x_temp
-                                y = y_temp
-                                #####
-                                if iterations < 3:
-                                        print("------------7----")
-                                        print("Improvement! Changing current sol.")
-                                #####
-                        else:
-                                #The new state is accepted if a random number is less than
-                                        #the calculated probability
+        #                 #Determining if the random state should be
+        #                         #accepted as the new state
+        #                 if energy_change <= 0:
+        #                         x = x_temp
+        #                         y = y_temp
+        #                         #####
+        #                         if iterations < 3:
+        #                                 print("------------7----")
+        #                                 print("Improvement! Changing current sol.")
+        #                         #####
+        #                 else:
+        #                         #The new state is accepted if a random number is less than
+        #                                 #the calculated probability
                                 
-                                #####
-                                if iterations < 3:
-                                        print("------------8----")
-                                        print("No improvement, updating if exp(energy_change/c) > random()")
-                                #####
+        #                         #####
+        #                         if iterations < 3:
+        #                                 print("------------8----")
+        #                                 print("No improvement, updating if exp(energy_change/c) > random()")
+        #                         #####
 
-                                # print("Energy Change " + str(energy_change))
-                                # print("C value " + str(c))
-                                # print("Division " + str(energy_change / (c*1.0)))
-                                if m.exp(energy_change / (c)) < r.random():
-                                        #####
-                                        if iterations < 3:
-                                                print("------------9----")
-                                                print("Updating sol. even without improv.")
-                                        #####
-                                        x = x_temp
-                                        y = y_temp
-
-
-
-                        if c >= 0.05:
-                                #####
-                                if iterations < 3:
-                                        print("------------10----")
-                                        print("Updating c value with " + str(self.alpha) + "*current_c")
-                                #####
-                                c = self.cooling_value(alpha, c, max_iter, iterations)
-                        #print(c)
-
-                        #Update status parameters
+        #                         # print("Energy Change " + str(energy_change))
+        #                         # print("C value " + str(c))
+        #                         # print("Division " + str(energy_change / (c*1.0)))
+        #                         if m.exp(energy_change / (c)) < r.random():
+        #                                 #####
+        #                                 if iterations < 3:
+        #                                         print("------------9----")
+        #                                         print("Updating sol. even without improv.")
+        #                                 #####
+        #                                 x = x_temp
+        #                                 y = y_temp
 
 
 
-                        #Add entry to solution_record
+        #                 if c >= 0.05:
+        #                         #####
+        #                         if iterations < 3:
+        #                                 print("------------10----")
+        #                                 print("Updating c value with " + str(self.alpha) + "*current_c")
+        #                         #####
+        #                         c = self.cooling_value(alpha, c, max_iter, iterations)
+        #                 #print(c)
+
+        #                 #Update status parameters
 
 
-                print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
-                print("x = " + str(x) + " and y = " + str(y))
-                #print("From the dataset: ")
-                #print(self.dataset)
 
-                return self.status
+        #                 #Add entry to solution_record
+
+
+        #         print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
+        #         print("x = " + str(x) + " and y = " + str(y))
+        #         #print("From the dataset: ")
+        #         #print(self.dataset)
+
+        #         return self.status
 

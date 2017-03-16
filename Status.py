@@ -1,21 +1,10 @@
+"""
+<class name>: <class description/objective>
+        (?)<subclass name>: <subclass description/objective>
+"""
+
 import csv
 class Status:
-
-
-        """def __init__(self):
-                num_sequences = 0
-                sequence_length = 0
-                alphabet_size = 0
-                num_iter = 0
-                max_iter = 0
-                func_calls = 0
-                func_evaluation = []
-                elapsed_time = 0.0
-                sa_parameters = {'c': [], 'alpha': 0}
-                ga_parameters = {}
-                mcm_parameters = {}
-                re_parameters = {}
-                solution_record = []"""
 
         def __init__(self, max_iter, num_sequences, sequence_length, alphabet_size):
                 self.max_iter = max_iter
@@ -63,11 +52,29 @@ class Status:
         def get_solution_record(self):
                 return self.solution_record
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def save_to_file(self, file_name):
                 with open(file_name, "wb") as out_file:
                         csv_obj = csv.writer(out_file)
                         csv_obj.writerows(self.solution_record)
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def load_from_file(self, file_name):
                 result = []
                 with open(file_name, "rb") as in_file:

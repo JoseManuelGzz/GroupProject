@@ -1,3 +1,7 @@
+"""
+<class name>: <class description/objective>
+        (?)<subclass name>: <subclass description/objective>
+"""
 class Algorithm:
 
 	problem_type = ''
@@ -11,6 +15,15 @@ class Algorithm:
 	def __init__(self, problem_type):
 		self.problem_type = problem_type
 
+	"""
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
 	def get_solution():
 		if problem_type == "CSP":
 			currentSolution = initRandom()

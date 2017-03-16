@@ -39,8 +39,8 @@ x = mutator.use_random_flip_2(solution_data, 0.3)
 print(x)
 """
 
-min_obj_f = MinimisingFunction()
-max_obj_f = MaximisingFunction(0.75 * columns)
+min_obj_f = CSPObjectiveFunction()
+max_obj_f = FFMSPObjectiveFunction(0.75 * columns)
 
 
 #def _init_(self, dataset, solution, mutator, obj_func):

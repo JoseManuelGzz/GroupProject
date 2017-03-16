@@ -1,3 +1,7 @@
+"""
+<class name>: <class description/objective>
+        (?)<subclass name>: <subclass description/objective>
+"""
 import random
 from collections import Counter
 class Dataset:
@@ -26,7 +30,7 @@ class Dataset:
             self.most_common_char.append(Counter(column).most_common(1)[0][0])
             #print(self.most_common_char[i])
             #print("---")
-        
+    
     def get_data(self):
         """
         returns a list of lists.
@@ -37,9 +41,27 @@ class Dataset:
         """
         return self.d
     
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def get_most_common_char_column(self):
         return self.most_common_char
 
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def get_alphabet_per_column(self):
         return self.alphabet_per_column
 

@@ -1,13 +1,28 @@
 """
-    Class definition for ObjectiveFunction
-    and corresponding subclasses
-    MaximisingFunction and MinimisingFunction
-    """
+    Class ObjectiveFunction: Functions for Minimisation and Maximisation
+        Subclass FFMSPObjectiveFunction: To determine how far a string is from
+            a set of sequences
+        Subclass CSPObjectiveFunction: To determine how close a string is from
+            a set of sequences
+"""
 
 class ObjectiveFunction(object):
     def __init__(self):
         pass
         
+    """
+    calculate_hamming_distances
+        Calculates n numeric values representing the 
+            number of chars that are different between 
+            a sequence in the dataset and in the solution
+        parameters:
+            sequences - List of lists representing char sequences
+            solution - List representing a sequence of chars
+        returns:
+            List with the hamming distances between the 
+                sequences in the dataset and the 
+                solution given
+    """
     # function that creates a list of distances from each sequence to a given string
     def calculate_hamming_distances(self, sequences, solution):
         result = []
@@ -21,44 +36,43 @@ class ObjectiveFunction(object):
             dist = 0
         return result
 
-class MaximisingFunction(ObjectiveFunction):
+
+class FFMSPObjectiveFunction(ObjectiveFunction):
     def __init__(self, threshold):
         self.threshold = threshold
-    def evaluate(self, sequences, proposed_solution):
-        error = False
-        #Validating the parameters
-        """if type(sequences) != type([]):
-            error = True
-        elif type(sequences[0]) != type([]):
-                error = True
-        elif type(sequences[0][0]) != type(0):
-            error = True
-        elif type(sequences[0][0]) != type(proposed_solution[0]):
-                error = True
-        if error:
-            raise NameError("First argument must be a list of lists, second argument must be a list,\
-                            both containing the same type, and third argument must be an integer")"""
-        
+
+    """
+    evaluate
+        Use the hamming distances to determine how far a string is from
+            a set of sequences
+        parameters:
+            sequences - List of lists representing char sequences
+            proposed_solution - List representing a sequence of chars
+        returns:
+            The length of a list  with the distances above the 
+                threshold defined in the class
+
+    """
+    def evaluate(self, sequences, proposed_solution):        
         #Obtain the list of distances between the proposed solution and the sequences
         distances = self.calculate_hamming_distances(sequences, proposed_solution)
         return -1 * len(filter(lambda x: x >= self.threshold, distances))
 
-class MinimisingFunction(ObjectiveFunction):
-    def evaluate(self, sequences, proposed_solution):
-        error = False
-        #Validating the parameters
-        """if type(sequences) != type([]):
-            error = True
-        elif type(sequences[0]) != type([]):
-                error = True
-        elif type(sequences[0][0]) != type(0):
-                error = True
-        elif type(sequences[0][0]) != type(proposed_solution[0]):
-                error = True
-        if error:
-            raise NameError("First argument must be a list of lists, second argument must be a list,\
-                            both containing the same type")"""
-        
+class CSPObjectiveFunction(ObjectiveFunction):
+
+    """
+    evaluate
+        Use the hamming distances to determine how close a string is from
+            a set of sequences
+        parameters:
+            sequences - List of lists representing char sequences
+            proposed_solution - List representing a sequence of chars
+        returns:
+            The largest distance between the proposed solution and 
+                the sequences of the dataset
+
+    """
+    def evaluate(self, sequences, proposed_solution):        
         #Obtain the list of distances between the proposed solution and the sequences
         distances = self.calculate_hamming_distances(sequences, proposed_solution)
         return max(distances)
