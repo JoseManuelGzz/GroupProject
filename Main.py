@@ -6,7 +6,7 @@ from SAAlgorithm_Draft import SAAlgorithm
 from Montecarlo import Montecarlo
 from Status import Status
 from Solution import Solution
-#from Figures import Figure
+from Figures import Figure
 
 columns = 10 #300
 
