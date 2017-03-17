@@ -1,6 +1,7 @@
 """
+
 <class name>: <class description/objective>
-        (?)<subclass name>: <subclass description/objective>
+
 """
 import random
 from collections import Counter
@@ -8,8 +9,8 @@ class Solution:
     def __init__(self, dataset):
         self.dataset = dataset
 
-    
     """
+    
         <func_name>
                 <description>
                 parameters:
@@ -18,10 +19,6 @@ class Solution:
                         <description>
 
     """   
-
-
-        
-
     def get_solution(self, solution_type):
         """
         returns a list of lists.
