@@ -10,9 +10,6 @@ import math as m
 
 
 class SAAlgorithm():
-        # def function(x):
-        # 	# x^3 - x^2 + 2x - 7
-        # 	return x ** 3 - x ** 2 + 2 * x - 7
 
         alpha = 0.95 #Value for cooling schedule
 

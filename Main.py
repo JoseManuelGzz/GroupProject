@@ -7,6 +7,7 @@ from Montecarlo import Montecarlo
 from Status import Status
 from Solution import Solution
 from Figures import Figure
+from GA import GA
 
 columns = 10 #300
 
@@ -31,7 +32,7 @@ mutator = Mutator(dataset)
 
 solution = Solution(dataset)
 
-solution_data = solution.get_solution('csp')
+#solution_data = solution.get_solution('csp')
 
 
 """
@@ -46,8 +47,10 @@ max_obj_f = FFMSPObjectiveFunction(0.75 * columns)
 
 #def _init_(self, dataset, solution, mutator, obj_func):
 
-
-sa = Montecarlo(data, solution_data, mutator, min_obj_f, status)
+solution_data = solution.get_solutions(50)
+#sa = Montecarlo(data, solution_data, mutator, min_obj_f, status)
+ga = GA(data, solution_data, mutator, mutator, status)
+status = ga.run(200)
 """
 solution_data = solution.get_solution('ffmsp')
 
