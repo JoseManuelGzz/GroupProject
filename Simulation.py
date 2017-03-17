@@ -53,7 +53,7 @@ class SimulationSA_CSP(Simulation):
         self.min_obj_f = CSPObjectiveFunction()
         self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.min_obj_f, self.status)    
 
-    def get_solution():
+    def get_solution(self):
         self.status = simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_csp_run.csv')
 
@@ -70,7 +70,7 @@ class SimulationSA_FFMSP(Simulation):
         self.max_obj_f = FFMSPObjectiveFunction(self.threshold_proportion * self.columns)
         self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.max_obj_f, self.status)
 
-    def get_solution():
+    def get_solution(self):
         self.status = simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_ffmsp_run.csv')
 
