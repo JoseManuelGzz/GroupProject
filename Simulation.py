@@ -39,8 +39,9 @@ class Simulation:
 		#algorithm.run_problem(algorithm, status)
         #Create figures in here
 
-class simulationSA_CSP(Simulation):
-    def __init__(self, alpha, initial_c):
+class SimulationSA_CSP(Simulation):
+    def __init__(self,self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
         self.alpha = alpha
         self.initial_c = initial_c
         self.min_obj_f = CSPObjectiveFunction()
@@ -50,8 +51,9 @@ class simulationSA_CSP(Simulation):
         self.status = simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_csp_run.csv')
 
-class simulationSA_FFMSP(Simulation):
-    def __init__(self, alpha, initial_c):
+class SimulationSA_FFMSP(Simulation):
+    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
         self.alpha = alpha
         self.initial_c = initial_c
         self.max_obj_f = FFMSPObjectiveFunction(self.threshold_proportion * self.columns)
@@ -61,10 +63,16 @@ class simulationSA_FFMSP(Simulation):
         self.status = simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_ffmsp_run.csv')
 
-class simulationMCM(Simulation):
+class SimulationMCM(Simulation):
+    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
 
-class simulationGA(Simulation):
+class SimulationGA(Simulation):
+    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)    
 
-class simulationEv(Simulation):
-        
+class SimulationEv(Simulation):
+    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
+     
 
