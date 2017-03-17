@@ -65,7 +65,7 @@ class SimulationSA_FFMSP(Simulation):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
         self.alpha = alpha
         self.initial_c = initial_c
-        self.max_obj_f = FFMSPObjectiveFunction(self.threshold_proportion * self.columns)
+        self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
         self.solution = Solution(self.dataset)
         self.solution_data = self.solution.get_solution('ffmsp')   
         self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.max_obj_f, self.status)
