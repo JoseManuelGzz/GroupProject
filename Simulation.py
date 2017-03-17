@@ -14,7 +14,7 @@ from Figures import Figure
 """
 class Simulation:
 
-	def __init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75):
+	def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
 		self.status = status
         self.columns = columns
         self.rows = rows
@@ -46,7 +46,7 @@ class Simulation:
 
 """
 class SimulationSA_CSP(Simulation):
-    def __init__(self,self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75, alpha, initial_c):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75, alpha, initial_c):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
         self.alpha = alpha
         self.initial_c = initial_c
@@ -63,7 +63,7 @@ class SimulationSA_CSP(Simulation):
 
 """
 class SimulationSA_FFMSP(Simulation):
-    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75, alpha, initial_c):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75, alpha, initial_c):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
         self.alpha = alpha
         self.initial_c = initial_c
@@ -80,7 +80,7 @@ class SimulationSA_FFMSP(Simulation):
 
 """
 class SimulationMCM(Simulation):
-    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75):
+    def __init__(self, self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
 
 """
@@ -89,7 +89,7 @@ class SimulationMCM(Simulation):
 
 """
 class SimulationGA(Simulation):
-    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75):
+    def __init__(self, self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)    
 
 """
@@ -98,7 +98,7 @@ class SimulationGA(Simulation):
 
 """
 class SimulationEv(Simulation):
-    def __init__(self, self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75):
+    def __init__(self, self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
 
 
