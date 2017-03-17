@@ -1,9 +1,5 @@
 """
-    Class ObjectiveFunction: Functions for Minimisation and Maximisation
-        Subclass FFMSPObjectiveFunction: To determine how far a string is from
-            a set of sequences
-        Subclass CSPObjectiveFunction: To determine how close a string is from
-            a set of sequences
+Class ObjectiveFunction: Functions for Minimisation and Maximisation
 """
 
 class ObjectiveFunction(object):
@@ -36,7 +32,10 @@ class ObjectiveFunction(object):
             dist = 0
         return result
 
-
+"""
+Class FFMSPObjectiveFunction: To determine how far a string is from
+            a set of sequences (Extends ObjectiveFunction)
+"""
 class FFMSPObjectiveFunction(ObjectiveFunction):
     def __init__(self, threshold):
         self.threshold = threshold
@@ -58,6 +57,10 @@ class FFMSPObjectiveFunction(ObjectiveFunction):
         distances = self.calculate_hamming_distances(sequences, proposed_solution)
         return -1 * len(filter(lambda x: x >= self.threshold, distances))
 
+"""
+Class CSPObjectiveFunction: To determine how close a string is from 
+    a set of sequences (Extends ObjectiveFunction)
+"""
 class CSPObjectiveFunction(ObjectiveFunction):
 
     """

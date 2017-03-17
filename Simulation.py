@@ -13,19 +13,17 @@ from Figures import Figure
 
 """
 class Simulation:
-
-	def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
-		self.status = status
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
         self.columns = columns
         self.rows = rows
         self.max_iterations = max_iterations
         self.alphabet = alphabet
         self.status = Status(max_iterations, rows, columns, len(alphabet))
         self.dataset = Dataset(rows= rows, cols = columns, alphabet=alphabet)
-        self.data = dataset.get_data()
-        self.mutator = Mutator(dataset)
-        self.solution = Solution(dataset)
-        self.solution_data = solution.get_solution(problem_type)
+        self.data = self.dataset.get_data()
+        self.mutator = Mutator(self.dataset)
+        self.solution = Solution(self.dataset)
+        self.solution_data = self.solution.get_solution(problem_type)
 
 	"""
         <func_name>
@@ -46,15 +44,15 @@ class Simulation:
 
 """
 class SimulationSA_CSP(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion , alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
         self.alpha = alpha
         self.initial_c = initial_c
         self.min_obj_f = CSPObjectiveFunction()
         self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.min_obj_f, self.status)    
 
     def get_solution(self):
-        self.status = simulated_annealing.run(self.alpha, self.initial_c)
+        self.status = self.simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_csp_run.csv')
 
 """
@@ -64,7 +62,7 @@ class SimulationSA_CSP(Simulation):
 """
 class SimulationSA_FFMSP(Simulation):
     def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion , alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
         self.alpha = alpha
         self.initial_c = initial_c
         self.max_obj_f = FFMSPObjectiveFunction(self.threshold_proportion * self.columns)
@@ -80,8 +78,8 @@ class SimulationSA_FFMSP(Simulation):
 
 """
 class SimulationMCM(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
 
 """
 
@@ -89,8 +87,8 @@ class SimulationMCM(Simulation):
 
 """
 class SimulationGA(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )    
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)    
 
 """
 
@@ -98,7 +96,7 @@ class SimulationGA(Simulation):
 
 """
 class SimulationEv(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
 
 
