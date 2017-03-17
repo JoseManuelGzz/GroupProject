@@ -10,14 +10,12 @@ class Solution:
         self.dataset = dataset
 
     """
-    
         <func_name>
                 <description>
                 parameters:
                         <param-1> - 
                 returns:
                         <description>
-
     """   
     def get_solution(self, solution_type):
         """
@@ -38,6 +36,14 @@ class Solution:
                 result.append(element)
             return result
 
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+    """   
     def get_solutions(self, rows):
         solutions = [[]]  
 	self.rows = rows

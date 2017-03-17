@@ -78,7 +78,7 @@ class SAAlgorithm():
 
                 energy_change = 0
 
-                while iterations <= max_iter: #and c >= 0.005:
+                while iterations <= max_iter: # and c > 0.0:
                         
                         self.status.add_c_sa_parameters(c)
 
@@ -113,7 +113,7 @@ class SAAlgorithm():
 
 
 
-                        if c >= 0.007:
+                        if c > 0.1:
                                 c = self.cooling_value(alpha, c, max_iter, iterations)
 
                 if y < 0:
