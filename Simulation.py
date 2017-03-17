@@ -13,7 +13,7 @@ from Figures import Figure
 
 """
 class Simulation:
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion):
         self.columns = columns
         self.rows = rows
         self.max_iterations = max_iterations
@@ -22,8 +22,6 @@ class Simulation:
         self.dataset = Dataset(rows= rows, cols = columns, alphabet=alphabet)
         self.data = self.dataset.get_data()
         self.mutator = Mutator(self.dataset)
-        self.solution = Solution(self.dataset)
-        self.solution_data = self.solution.get_solution(problem_type)
 
 	"""
         <func_name>
@@ -44,12 +42,14 @@ class Simulation:
 
 """
 class SimulationSA_CSP(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type, alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
         self.alpha = alpha
         self.initial_c = initial_c
         self.min_obj_f = CSPObjectiveFunction()
-        self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.min_obj_f, self.status)    
+        self.solution = Solution(self.dataset)
+        self.solution_data = self.solution.get_solution('csp')   
+        self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.min_obj_f, self.status) 
 
     def get_solution(self):
         self.status = self.simulated_annealing.run(self.alpha, self.initial_c)
@@ -61,11 +61,13 @@ class SimulationSA_CSP(Simulation):
 
 """
 class SimulationSA_FFMSP(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion , alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
         self.alpha = alpha
         self.initial_c = initial_c
         self.max_obj_f = FFMSPObjectiveFunction(self.threshold_proportion * self.columns)
+        self.solution = Solution(self.dataset)
+        self.solution_data = self.solution.get_solution('ffmsp')   
         self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.max_obj_f, self.status)
 
     def get_solution(self):
@@ -78,8 +80,8 @@ class SimulationSA_FFMSP(Simulation):
 
 """
 class SimulationMCM(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
 
 """
 
@@ -87,8 +89,8 @@ class SimulationMCM(Simulation):
 
 """
 class SimulationGA(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)    
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)    
 
 """
 
@@ -96,7 +98,7 @@ class SimulationGA(Simulation):
 
 """
 class SimulationEv(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, problem_type)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
 
 
