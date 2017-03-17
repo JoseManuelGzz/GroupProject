@@ -6,7 +6,7 @@ from SAAlgorithm_Draft import SAAlgorithm
 from Montecarlo import Montecarlo
 from Status import Status
 from Solution import Solution
-from Figures import Figure  
+#from Figures import Figure  
 """
 
 <class name>: <class description/objective>
@@ -71,7 +71,7 @@ class SimulationSA_FFMSP(Simulation):
         self.simulated_annealing = SAAlgorithm(self.data, self.solution_data, self.mutator, self.max_obj_f, self.status)
 
     def get_solution(self):
-        self.status = simulated_annealing.run(self.alpha, self.initial_c)
+        self.status = self.simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_ffmsp_run.csv')
 
 """
@@ -98,7 +98,7 @@ class SimulationGA(Simulation):
 
 """
 class SimulationEv(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, number_children):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
 
 
