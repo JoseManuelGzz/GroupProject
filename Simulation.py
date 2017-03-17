@@ -14,7 +14,7 @@ from Figures import Figure
 """
 class Simulation:
 
-	def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
+	def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
 		self.status = status
         self.columns = columns
         self.rows = rows
@@ -46,8 +46,8 @@ class Simulation:
 
 """
 class SimulationSA_CSP(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75, alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion , alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
         self.alpha = alpha
         self.initial_c = initial_c
         self.min_obj_f = CSPObjectiveFunction()
@@ -63,8 +63,8 @@ class SimulationSA_CSP(Simulation):
 
 """
 class SimulationSA_FFMSP(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75, alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion , alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
         self.alpha = alpha
         self.initial_c = initial_c
         self.max_obj_f = FFMSPObjectiveFunction(self.threshold_proportion * self.columns)
@@ -80,8 +80,8 @@ class SimulationSA_FFMSP(Simulation):
 
 """
 class SimulationMCM(Simulation):
-    def __init__(self, self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
 
 """
 
@@ -89,8 +89,8 @@ class SimulationMCM(Simulation):
 
 """
 class SimulationGA(Simulation):
-    def __init__(self, self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)    
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )    
 
 """
 
@@ -98,7 +98,7 @@ class SimulationGA(Simulation):
 
 """
 class SimulationEv(Simulation):
-    def __init__(self, self, columns, rows, max_iterations, alphabet, threshold_proportion=0.75):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion=0.75)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion ):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, problem_type, threshold_proportion )
 
 
