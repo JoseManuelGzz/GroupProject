@@ -79,9 +79,38 @@ class SimulationSA_FFMSP(Simulation):
 <class name>: <class description/objective>
 
 """
-class SimulationMCM(Simulation):
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion):
+class SimulationMCM_CSP(Simulation):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+        self.alpha = alpha
+        self.initial_c = initial_c
+        self.min_obj_f = CSPObjectiveFunction()
+        self.solution = Solution(self.dataset)
+        self.solution_data = self.solution.get_solution('csp')   
+        self.montecarlo_metropolis = Montecarlo(self.data, self.solution_data, self.mutator, self.min_obj_f, self.status)
+
+    def get_solution(self):
+        self.status = self.montecarlo_metropolis.run(self.alpha, self.initial_c)
+        self.status.save_to_file('mcm_csp_run.csv')
+
+"""
+
+<class name>: <class description/objective>
+
+"""
+class SimulationMCM_FFMSP(Simulation):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+        self.alpha = alpha
+        self.initial_c = initial_c
+        self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
+        self.solution = Solution(self.dataset)
+        self.solution_data = self.solution.get_solution('ffmsp')   
+        self.montecarlo_metropolis = Montecarlo(self.data, self.solution_data, self.mutator, self.max_obj_f, self.status)
+
+    def get_solution(self):
+        self.status = self.montecarlo_metropolis.run(self.alpha, self.initial_c)
+        self.status.save_to_file('mcm_ffmsp_run.csv')
 
 """
 
