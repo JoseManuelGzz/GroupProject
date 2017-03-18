@@ -14,3 +14,4 @@ mcm_csp.get_solution()
 
 mcm_ffmsp = SimulationMCM_FFMSP(10,7,5000,range(0,5),0.75,0.95,200)
 mcm_ffmsp.get_solution()
+
