@@ -1,31 +1,32 @@
+"""
+SAAlgorithm: Class that implements the Simulated Annealing optimization
+                Algorithm for String Consensus problems
+"""
+
 # Initial implementation of the Simulated Annealing Algorithm
 
 import random as r
 import math as m
 
-"""
-<SAAlgorithm>: Class that implements the Simulated Annealing optimization
-                Algorithm for String Consensus problems
-"""
 class SAAlgorithm():
 
         """
-        <__init__>
+        __init__
                 Constructor for the class
                 parameters:
-                        <self> - Pointer to the current object
-                        <dataset> - List of lists containing 
+                        self - Pointer to the current object
+                        dataset - List of lists containing 
                                 same length sequences of characters
-                        <solution> - list of characters with the same
+                        solution - list of characters with the same
                                 length of the sublists in the dataset
                                 parameter
-                        <mutator> - Mutator object that generates new 
+                        mutator - Mutator object that generates new 
                                 solution sequences based on a given
                                 sequence
-                        <obj_func> - ObjectiveFunction object that produces 
+                        obj_func - ObjectiveFunction object that produces 
                                 a numeric evaluation of a sequence and a 
                                 dataset (based on Hamming distances)
-                        <status> - Status object that contains a record of 
+                        status - Status object that contains a record of 
                                 each run of an algorithm
                 returns:
                         -None-
@@ -70,8 +71,7 @@ class SAAlgorithm():
                 y = self.obj_func.evaluate(self.dataset, x)
                 self.status.add_function_calls()
 
-                # Control parameter, defined by the function of Temperature
-                c = initial_c 
+                c = initial_c # Control parameter, defined by the function of Temperature
 
                 x_temp = 0
                 y_temp = 0
@@ -99,12 +99,14 @@ class SAAlgorithm():
                         #Calculate change of energy
                         energy_change = y_temp - y
 
-                        #Determining if the random state should be accepted as the new state
+                        #Determining if the random state should be
+                                #accepted as the new state
                         if energy_change <= 0:
                                 x = x_temp
                                 y = y_temp
                         else:
-                                #The new state is accepted if a random number is less than the calculated probability
+                                #The new state is accepted if a random number is less than
+                                        #the calculated probability
                                 if m.exp(energy_change / c) < r.random():
                                         x = x_temp
                                         y = y_temp
@@ -114,13 +116,12 @@ class SAAlgorithm():
                         if c > 0.1:
                                 c = self.cooling_value(alpha, c, max_iter, iterations)
 
-                # Change the sign of the result for the FFMSP solution
                 if y < 0:
                         y *= -1
-
-                #Print the results
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
+                #print("From the dataset: ")
+                #print(self.dataset)
 
                 return self.status
 
