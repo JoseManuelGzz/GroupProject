@@ -22,49 +22,6 @@ class Montecarlo():
                 self.obj_func = obj_func
                 self.status = status
 
-        def print_min_fun(a, b):
-                y_min = 100000
-                y_temp = 0
-                x_min = 0
-                while a <= b:
-                        y_temp = function(a)
-                        if y_temp < y_min:
-                                y_min = y_temp
-                                x_min = a
-                        a = a + 1
-                print("The minimum value is y =" + str(y_min) + " in x = " + str(x_min))
-
-        # number: the number of random numbers to be discarded
-        # seed: the seed for the random number generator
-        def prepare_random_numbers(number, seed):
-                r.seed(seed)
-                for i in range(number):
-                        r.random()
-                print(r.random())
-
-        # function that creates a list of distances from each sequence to a given string
-        def calculate_hamming_distances(sequences, string):
-                result = []
-                dist = 0
-                for sequence in sequences:
-                        #Add 1 if elements are different, 0 if they are the same
-                        for i in range(len(sequence)):
-                                if sequence[i] != string[i]:
-                                        dist = dist + 1
-                        result.append(dist)
-                        dist = 0
-                return result
-
-        def csp_cost_function(distances):
-                return max(distances)
-
-        def ffmsp_cost_function(distances, t):
-                return len(filter(lambda x: x >= t, distances))
-
-        def cooling_value(self, alpha, current_c, max_iterat, curr_iter):
-                return alpha * current_c#((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
-
-
         def run(self, alpha, initial_c):
                 iterations = 0
                 max_iter = self.status.get_max_iterations()

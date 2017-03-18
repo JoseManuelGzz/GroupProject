@@ -3,7 +3,7 @@ from ObjectiveFunction import CSPObjectiveFunction
 from ObjectiveFunction import FFMSPObjectiveFunction
 from Mutators_v2 import ExpMutator
 from Mutators_v2 import RandomFlip
-from SAAlgorithm_Draft import SAAlgorithm
+from SimulatedAnnealing import SAAlgorithm
 from GA import GA
 from Montecarlo import Montecarlo
 from Status import Status
