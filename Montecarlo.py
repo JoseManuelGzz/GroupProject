@@ -88,7 +88,7 @@ class Montecarlo():
                         self.status.add_c_sa_parameters(c)
 
                         #Get random new state
-                        x_temp = self.mutator.use_random_flip_2(self.solution, 0.3)
+                        x_temp = self.mutator.mutate(self.solution)
 
                         y_temp = self.obj_func.evaluate(self.dataset, x_temp)
                         self.status.add_function_calls()

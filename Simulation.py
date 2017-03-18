@@ -1,7 +1,8 @@
 from Dataset import Dataset
 from ObjectiveFunction import CSPObjectiveFunction
 from ObjectiveFunction import FFMSPObjectiveFunction
-from Mutator import Mutator
+from Mutators_v2 import ExpMutator
+from Mutators_v2 import RandomFlip
 from SAAlgorithm_Draft import SAAlgorithm
 from GA import GA
 from Montecarlo import Montecarlo
@@ -28,11 +29,12 @@ class Simulation:
                     <rows> - Number of rows in the dataset
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
-                    <threshold_proportion> - Constant used for the FFMSP objective function        
+                    <threshold_proportion> - Constant used for the FFMSP objective function
+                    <mutator_name> - Name of the mutator to be used        
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name):
         self.columns = columns
         self.rows = rows
         self.max_iterations = max_iterations
@@ -40,7 +42,10 @@ class Simulation:
         self.status = Status(max_iterations, rows, columns, len(alphabet))
         self.dataset = Dataset(rows= rows, cols = columns, alphabet=alphabet)
         self.data = self.dataset.get_data()
-        self.mutator = Mutator(self.dataset)
+        if mutator_name == 'RandomFlip':
+            self.mutator = RandomFlip(self.dataset, 0.3)
+        elif mutator_name == 'Exponential':
+            self.mutator = ExpMutator(self.dataset, 0.3)
 
 """
 
@@ -60,13 +65,14 @@ class SimulationSA_CSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
+                    <mutator_name> - Name of the mutator to be used
                     <alpha> - Cooling value for the temperature 
                     <initial_c> - Temperature value        
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
         self.alpha = alpha
         self.initial_c = initial_c
         self.min_obj_f = CSPObjectiveFunction()
@@ -104,13 +110,14 @@ class SimulationSA_FFMSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
+                    <mutator_name> - Name of the mutator to be used
                     <alpha> - Cooling value for the temperature 
                     <initial_c> - Temperature value        
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
         self.alpha = alpha
         self.initial_c = initial_c
         self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
@@ -148,13 +155,14 @@ class SimulationMCM_CSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
+                    <mutator_name> - Name of the mutator to be used
                     <alpha> - Cooling value for the temperature 
                     <initial_c> - Temperature value        
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
         self.alpha = alpha
         self.initial_c = initial_c
         self.min_obj_f = CSPObjectiveFunction()
@@ -192,13 +200,14 @@ class SimulationMCM_FFMSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
+                    <mutator_name> - Name of the mutator to be used
                     <alpha> - Cooling value for the temperature 
                     <initial_c> - Temperature value        
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, alpha, initial_c):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, alpha, initial_c):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
         self.alpha = alpha
         self.initial_c = initial_c
         self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
@@ -235,12 +244,13 @@ class SimulationGA_CSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
+                    <mutator_name> - Name of the mutator to be used
                     <chrom_length> - Length of the chromosomes     
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, chrom_length):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)    
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, chrom_length):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)    
         self.chrom_length = chrom_length
         self.min_obj_f = CSPObjectiveFunction()
         self.solution = Solution(self.dataset)
@@ -277,12 +287,13 @@ class SimulationGAFFMSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
+                    <mutator_name> - Name of the mutator to be used
                     <chrom_length> - Length of the chromosomes     
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, chrom_length):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)    
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, chrom_length):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)    
         self.chrom_length = chrom_length
         self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
         self.solution = Solution(self.dataset)
@@ -319,11 +330,12 @@ class SimulationEv_CSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function   
+                    <mutator_name> - Name of the mutator to be used
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, number_children):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_children):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
     """
     <get_solution>
             <Function that runs the Evolutionary algorithm for the CSP
@@ -353,11 +365,12 @@ class SimulationEv_FFMSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function   
+                    <mutator_name> - Name of the mutator to be used
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, number_children):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion)
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_children):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
     """
     <get_solution>
             <Function that runs the Evolutionary algorithm for the FFMSP
