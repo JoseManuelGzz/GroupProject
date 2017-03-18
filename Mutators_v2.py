@@ -25,17 +25,24 @@ class ExpMutator(mutators):
         self.prob = prob
     
     def mutate(self, solution):
-        i = random.randint(0, len(solution))
+        i = random.randint(0, len(solution)-1)
         curr = i
         coin = random.uniform(0, 1)
         alphabet_per_column = self.dataset.get_alphabet_per_column()
-        while (curr < len(solution) or coin < self.prob):
+        while (curr < len(solution) and coin < self.prob):
             solution[curr] = random.choice(alphabet_per_column[curr])
             coin = random.uniform(0, 1)
-            if (curr >= len(solution)-1):
-                curr = len(solution)+1
+            #To avoid always considering the final element
+            #if the method reaches the third from last element
+            #consider the following options equally:
+            #go to second from last, and then either to the end or finish
+            #go to the last element and then finish
+            #finish completely
+            if (curr < len(solution)-2):
+                curr =  random.randint(curr+1, len(solution))
+                if (curr == len(solution)) :break
             else:
-                curr =  random.randint(curr, len(solution))
+                break
         return solution
 
 class RandomFlip(mutators):
