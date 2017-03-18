@@ -1,27 +1,44 @@
-
-
-# Initial implementation of the Simulated Annealing Algorithm
-
 import random as r
 import math as m
-#from ObjectiveFunction import MinimisingFunction as minfun
-#from ObjectiveFunction import MaximisingFunction as maxfun
 
+'''
 
+<Montecarlo>: <Class that implements the Montecarlo Metropolis optimization
+                Algorithm for String Consensus problems>
+
+'''
 class Montecarlo():
-        # def function(x):
-        #   # x^3 - x^2 + 2x - 7
-        #   return x ** 3 - x ** 2 + 2 * x - 7
-
-        alpha = 0.95 #Value for cooling schedule
-
+        '''
+        <__init__>
+                <Constructor of the Montecarlo class>
+                parameters:
+                        <self> - Pointer to the object
+                        <dataset> - A copy of the dataset object already initialised
+                        <solution> - A copy of the solution object already initialised
+                        <mutator> - A copy of the mutator object to be used
+                        <obj_func> - A copy of the objective function object to be used
+                        <status> - A copy of the status object where the results will be stored
+                returns:
+                        -NA-
+        '''
         def __init__(self, dataset, solution, mutator, obj_func, status):
                 self.dataset = dataset
                 self.solution = solution
                 self.mutator = mutator
                 self.obj_func = obj_func
                 self.status = status
-
+        '''
+        <run>
+                <Method that gets the solution for the string consensus problem
+                with all the parameters used to create the object, and prints 
+                the results>
+                parameters:
+                        <self> - Pointer to the object
+                        <alpha> - Cooling value for the temperature
+                        <initial_c> - Initial value of the temperature
+                returns:
+                        -NA-
+        '''
         def run(self, alpha, initial_c):
                 iterations = 0
                 max_iter = self.status.get_max_iterations()
@@ -56,42 +73,25 @@ class Montecarlo():
                         current_entry = [iterations, self.status.get_function_calls(), y, y_temp]
                         self.status.add_solution_record_entry(current_entry)
 
-                        #print(y_temp)
-                        #print(y)
-                        #print("---")
-
                         #Calculate change of energy
                         energy_change = y_temp - y
 
-                        #Determining if the random state should be
-                                #accepted as the new state
+                        #Determining if the random state should be accepted as the new state
                         if energy_change <= 0:
                                 x = x_temp
                                 y = y_temp
                         else:
-                                #The new state is accepted if a random number is less than
-                                        #the calculated probability
-                                #print("The values for c and energy change")
-                                #print(c)
-                                #print(energy_change)
-                                #print("----------")
+                                #The new state is accepted if a random number is less than the calculated probability
                                 if m.exp(energy_change / c) < r.random():
                                         x = x_temp
                                         y = y_temp
 
-                        #print(c)
-
-                        #Update status parameters
-
-
-
-                        #Add entry to solution_record
-
+                # Change the sign of for the FFMSP solution. 
                 if y < 0:
                         y *= -1
+
+                # Print the results
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
-                #print("From the dataset: ")
-                #print(self.dataset)
 
                 return self.status
