@@ -7,8 +7,6 @@ import numpy
 import operator
 
 class Evolutionary:
-    # create the input string
-    #sa = SAAlgorithm(data, solution_data, mutator, min_obj_f, status)
 
     def __init__(self, dataset, solution, mutator, obj_func, status, num_parents=6):
         self.dataset = dataset
@@ -57,7 +55,7 @@ class Evolutionary:
             #print self.num_parents
             for i in xrange(self.num_parents):
                 parent_result.append ((self.solutions[i], self.obj_func.evaluate(self.data, self.solutions[i])))
-                child =  self.mutator.use_random_flip_2(list(self.solutions[i]),prob=prob_mutation)
+                child =  self.mutator.mutate(list(self.solutions[i]),prob=prob_mutation)
                 child_result.append((child, self.obj_func.evaluate(self.data, child)))
             #combined_population = self.merge_two_dicts(parent_result,child_result)
             combined_population = parent_result + child_result

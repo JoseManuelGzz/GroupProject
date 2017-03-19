@@ -8,6 +8,7 @@ from GA import GA
 from Montecarlo import Montecarlo
 from Status import Status
 from Solution import Solution
+from Evolutionary import Evolutionary
 #from Figures import Figure  
 
 """
@@ -334,8 +335,11 @@ class SimulationEv_CSP(Simulation):
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_children):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_parents):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
+        self.min_obj_f = CSPObjectiveFunction()
+        self.solution = Solution(self.dataset)
+        self.evolutionary = Evolutionary(dataset=self.dataset, mutator=self.mutator, solution=self.solution, obj_func=self.min_obj_f, num_parents=number_parents, status=self.status )
     """
     <get_solution>
             <Function that runs the Evolutionary algorithm for the CSP
@@ -346,7 +350,8 @@ class SimulationEv_CSP(Simulation):
                     -NA-
     """
     def get_solution(self):
-        pass
+        self.status = self.evolutionary.run()
+        self.status.save_to_file('evo_csp_run.csv')
 """
 
 <SimulationEv_FFMSP>: <This class is used to create an instance and get the solution
@@ -369,8 +374,12 @@ class SimulationEv_FFMSP(Simulation):
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_children):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_parents):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
+        self.min_obj_f = FFMSPObjectiveFunction()
+        self.solution = Solution(self.dataset)
+        self.evolutionary = Evolutionary(dataset=self.dataset, mutator=self.mutator, solution=self.solution,
+                                         obj_func=self.min_obj_f, num_parents=number_parents, status=self.status)
     """
     <get_solution>
             <Function that runs the Evolutionary algorithm for the FFMSP
@@ -381,4 +390,5 @@ class SimulationEv_FFMSP(Simulation):
                     -NA-
     """
     def get_solution(self):
-        pass
+        self.status = self.evolutionary.run()
+        self.status.save_to_file('evo_ffmsp_run.csv')
