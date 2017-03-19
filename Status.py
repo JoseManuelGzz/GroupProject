@@ -1,22 +1,20 @@
+"""
+Status: Class to keep track of performance of the
+        different executions of the heurisitic
+        algorithms
+"""
+
 import csv
 class Status:
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
 
-
-        """def __init__(self):
-                num_sequences = 0
-                sequence_length = 0
-                alphabet_size = 0
-                num_iter = 0
-                max_iter = 0
-                func_calls = 0
-                func_evaluation = []
-                elapsed_time = 0.0
-                sa_parameters = {'c': [], 'alpha': 0}
-                ga_parameters = {}
-                mcm_parameters = {}
-                re_parameters = {}
-                solution_record = []"""
-
+        """
         def __init__(self, max_iter, num_sequences, sequence_length, alphabet_size):
                 self.max_iter = max_iter
                 self.num_sequences = num_sequences
@@ -32,42 +30,149 @@ class Status:
                 self.re_parameters = {}
                 self.solution_record = []
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
 
+        """
         def add_iteration(self):
                 self.num_iter = self.num_iter + 1
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def add_function_calls(self):
                 self.func_calls = self.func_calls + 1
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def add_function_evaluation(self, func_value):
                 self.func_evaluation.append(func_value)
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def add_c_sa_parameters(self, c_value):
                 self.sa_parameters["c"].append(c_value)
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def add_solution_record_entry(self, entry):
                 self.solution_record.append(entry)
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def set_alpha_value_sa(self, alpha):
                 self.sa_parameters['alpha'] = alpha
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def set_elapsed_time(self, elapsed_time):
                 self.elapsed_time = elapsed_time
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def get_function_calls(self):
                 return self.func_calls
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def get_max_iterations(self):
                 return self.max_iter
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def get_solution_record(self):
                 return self.solution_record
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def save_to_file(self, file_name):
                 with open(file_name, "wb") as out_file:
                         csv_obj = csv.writer(out_file)
                         csv_obj.writerows(self.solution_record)
 
+        """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+        """
         def load_from_file(self, file_name):
                 result = []
                 with open(file_name, "rb") as in_file:

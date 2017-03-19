@@ -1,17 +1,36 @@
 import random
 from collections import Counter
+
+"""
+
+<Solution>: <Class that creates a solution for the 
+             string consensus problem for both the 
+             CSP and FFMSP given a dataset>
+
+"""
 class Solution:
+    """
+    <__init__>
+            <Constructor for the Solution class>
+            parameters:
+                    <self> - Pointer to the object
+                    <dataset> - A dataset object with the same 
+                                length sequences as characters 
+            returns:
+    """  
     def __init__(self, dataset):
         self.dataset = dataset
-        
+
+    """
+    <get_solution>
+            <Method that returns a solution when using the SA or MCM algorithms.>
+            parameters:
+                    <self> - Pointer to the object
+                    <solution_type> - String that specifies the problem type, CSP or FFMSP
+            returns:
+                    <result> - A list of lists with the proposed solution 
+    """    
     def get_solution(self, solution_type):
-        """
-        returns a list of lists.
-        All the elements of each list are from the specified alphabet.
-        Default alphabet is 0-9
-        Total number of lists are determined by the self.rows variable
-        Number of items in each list are determined by the self.cols variable
-        """
         if solution_type.lower() == 'csp':
             return self.dataset.get_most_common_char_column()
         else:
@@ -23,6 +42,23 @@ class Solution:
                 result.append(element)
             return result
 
-    def get_solutions(self):
-        pass
+    """
+    <get_solution>
+            <Method that returns a solution when using the Genetic algorithm.>
+            parameters:
+                    <self> - Pointer to the object
+                    <rows> - The number of rows in the dataset
+            returns:
+                    <result> - A list of lists with the proposed solution 
+    """  
+    def get_solutions(self, rows):
+        solutions = [[]]  
+	self.rows = rows
+	chrom_length = self.dataset.cols
+    	for i in range(rows):  
+            temp = []  
+            for j in range(chrom_length):  
+                temp.append(random.randint(0, 3))  
+                solutions.append(temp)  
+        return solutions[1:]
 

@@ -1,179 +1,116 @@
-"""
-=============================================
-||         M U T A T O R S . P Y           ||
-=============================================
-[PURPOSE]
-The purpose of this file is to provide functions that
-can mutate a provided list. Each function uses a different
-mutation method. Some of the functions do require different
-parameters than others and some are only tailored for lists/
-strings of bits (first and second function). If further mutation
-methods are desired, they can be added to the file as well.
-
-[USAGE]
-Use an import statement to load the contents of the file
-and then make function calls based on the mutation method
-preferred.
-
-[RESOURCES]
-(1): https://en.wikipedia.org/wiki/Mutation_(genetic_algorithm)
-(2): https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_mutation.htm
-
-[AUTHOR]
-Created for the purposes of Group 3 for CE903
-by Alexandros G. Stergiou
-Date: 18 Feb. 2017
---------------------------------------------------------------------------------
-"""
-
-
-
-"""
---------------------------------------------------------------------------------
-import statements
---------------------------------------------------------------------------------
-"""
 import random as random
 import string
 
-class mutators:
+"""
 
+<Mutators>: <Class that contains the different mutating operators
+             as subclasses>
 
+"""
+class Mutators:
     """
-    --------------------------------------------------------------------------------
-    This function will invert every bit inside the list
-    --------------------------------------------------------------------------------
+    <__init__>
+            <Constructor of the parent Mutators class>
+            parameters:
+                    <self> - Pointer to the object
+                    <dataset> - A copy of the dataset object
+            returns:
+                    -NA-
     """
-    #Used only for bit lists
-    def use_Flip_Bit(_list_):
-        l = []
-        for bit in _list_:
-            if (bit == 0):
-                l.append(1)
+    def __init__(self, dataset):
+        self.dataset = dataset
+
+"""
+
+<ExpMutator>: <Mutator subclass that implements the Exponential 
+                mutation>
+
+"""
+class ExpMutator(Mutators):
+    """
+    <__init__>
+            <Constructor of the Exponential mutator subclass>
+            parameters:
+                    <self> - Pointer to the object
+                    <dataset> - A copy of the dataset object
+                    <prob> - Probability of mutation
+            returns:
+                    -NA-
+    """
+    def __init__(self, dataset, prob):
+        self.dataset = dataset
+        self.prob = prob
+    
+    """
+    <mutate>
+            <Method that implements the exponential mutation on the 
+             current solution to the problem>
+            parameters:
+                    <self> - Pointer to the object
+                    <solution> - A list with the current solution to the problem
+            returns:
+                    <solution> - An updated list with the solution after undergoing mutation
+    """
+    def mutate(self, solution):
+        i = random.randint(0, len(solution)-1)
+        curr = i
+        coin = random.uniform(0, 1)
+        alphabet_per_column = self.dataset.get_alphabet_per_column()
+        while (curr < len(solution) and coin < self.prob):
+            solution[curr] = random.choice(alphabet_per_column[curr])
+            coin = random.uniform(0, 1)
+            #To avoid always considering the final element
+            #if the method reaches the third from last element
+            #consider the following options equally:
+            #go to second from last, and then either to the end or finish
+            #go to the last element and then finish
+            #finish completely
+            if (curr < len(solution)-2):
+                curr =  random.randint(curr+1, len(solution))
+                if (curr == len(solution)) :break
             else:
-                l.append(0)
-        return l
+                break
+        return solution
 
+"""
 
+<RandomFlip>: <Mutator subclass that implements the Random Flip 
+                mutation>
+
+"""
+class RandomFlip(Mutators):
     """
-    --------------------------------------------------------------------------------
-    Here a sudo-randomly selected number of bits are fliped from the
-    original list.
-    --------------------------------------------------------------------------------
+    <__init__>
+            <Constructor of the Random Flip mutator subclass>
+            parameters:
+                    <self> - Pointer to the object
+                    <dataset> - A copy of the dataset object
+                    <prob> - Probability of mutation
+            returns:
+                    -NA-
     """
-    #Used only for bit lists
-    def use_Bit_String(_list_):
-        iterations = random.randrange(1,len(_list_)-1,1)
+    def __init__(self, dataset, prob):
+        self.dataset = dataset
+        self.prob = prob
+    
+    """
+    <mutate>
+            <Method that implements the random flip mutation on the 
+             current solution to the problem>
+            parameters:
+                    <self> - Pointer to the object
+                    <solution> - A list with the current solution to the problem
+            returns:
+                    <solution> - An updated list with the solution after undergoing mutation
+    """
+    def mutate(self, solution):
         i = 0
-        print iterations
-        while (i<iterations):
-            pos = random.randrange(0,len(_list_)-1,1)
-            print pos
-            if (_list_[pos] == 0):
-                _list_[pos] = 1
-            else:
-                _list_[pos] = 0
-            i=i+1
-        return _list_
-
-
-
-
-    """
-    --------------------------------------------------------------------------------
-    This is the random flip function where a probability
-    is passed as an argument and based of that,
-    each bit is flipped.
-    --------------------------------------------------------------------------------
-    """
-    #Used only for bit lists
-    def use_Random_Flip(_list_, prob):
-        i = 0
-        while (i<len(_list_)-1):
+        alphabet_per_column = self.dataset.get_alphabet_per_column()
+        while (i < len(solution)):
             p = random.uniform(0, 1)
-            if (p<prob):
-                if (_list_[i] == 0):
-                    _list_[i] = 1
-                else:
-                    _list_[i] = 0
+            if (p < self.prob):
+                solution[i] = random.choice(alphabet_per_column[i])
             i=i+1
-        return _list_
-            
-
-            
-
-
-    """
-    --------------------------------------------------------------------------------
-    This function will repurn a sudo-rando list based on the
-    initial list provided. Can be used for three types:
-    ->int
-    ->float
-    ->string
-    --------------------------------------------------------------------------------
-    """
-    def use_Sudorandom(_list_, _type_):
-        l = []
-        for element in _list_:
-            if (_type_ == "int"):
-                element = random.randint(min(_list_),max(_list_))
-            elif (_type_ == "float"):
-                element = random.uniform(min(_list_),max(_list_))
-            elif (_type_ == "string"):
-                element = random.choice(string.lowercase)
-            l.append(element)
-        return l
-
-
-
-    """
-    --------------------------------------------------------------------------------
-    The use_Boundary will switch the element in the position
-    defined to either the largest or smallest element in the list.
-    The position of the element must be passed as a parameter
-    --------------------------------------------------------------------------------
-    """
-    def use_Boundary(_list_,pos):
-        _list_[pos] = random.choice(max(_list_),min(_list_))
-        return _list_
-
-
-    """
-    --------------------------------------------------------------------------------
-    The use_Swap function will swap the elements in the two
-    specified positions. The positions are passed as arguments
-    as well.
-    --------------------------------------------------------------------------------
-    """
-    def use_Swap(_list_, pos_a , pos_b):
-        temp = _list_[pos_b]
-        _list_[pos_b] = _list_[pos_a]
-        _list_[pos_a] = temp
-        return _list_
-
-
-    """
-    --------------------------------------------------------------------------------
-    This function will invert a segment of the list. The start and
-    end of the list segment must be passed to the function in the
-    call.
-    --------------------------------------------------------------------------------
-    """
-    def use_Inversion(_list_,start,end):
-        _list_[start:end] = (_list_[start:end+1])[::-1]
-        return _list_
-
-
-    """
-    --------------------------------------------------------------------------------
-    The use_Scramble will get a portion of the list and
-    randomize the included elements. The start and end of the
-    portion are passed as parameters.
-    --------------------------------------------------------------------------------
-    """
-    def use_Scramble(_list_,start,end):
-        _list_[start:end]= random.shuffle(_list_[start:end])
-        return _list_
-
+        return solution
 
 
