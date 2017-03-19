@@ -1,14 +1,14 @@
 import random as r
 import math as m
 
-'''
+"""
 
 <Montecarlo>: <Class that implements the Montecarlo Metropolis optimization
                 Algorithm for String Consensus problems>
 
-'''
+"""
 class Montecarlo():
-        '''
+        """
         <__init__>
                 <Constructor of the Montecarlo class>
                 parameters:
@@ -20,14 +20,14 @@ class Montecarlo():
                         <status> - A copy of the status object where the results will be stored
                 returns:
                         -NA-
-        '''
+        """
         def __init__(self, dataset, solution, mutator, obj_func, status):
                 self.dataset = dataset
                 self.solution = solution
                 self.mutator = mutator
                 self.obj_func = obj_func
                 self.status = status
-        '''
+        """
         <run>
                 <Method that gets the solution for the string consensus problem
                 with all the parameters used to create the object, and prints 
@@ -38,7 +38,7 @@ class Montecarlo():
                         <initial_c> - Initial value of the temperature
                 returns:
                         -NA-
-        '''
+        """
         def run(self, alpha, initial_c):
                 iterations = 0
                 max_iter = self.status.get_max_iterations()

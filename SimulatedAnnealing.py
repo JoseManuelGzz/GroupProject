@@ -7,7 +7,7 @@ SAAlgorithm: Class that implements the Simulated Annealing optimization
 """
 class SAAlgorithm():
 
-        '''
+        """
         <__init__>
                 Constructor for the class
                 parameters:
@@ -28,7 +28,7 @@ class SAAlgorithm():
                 returns:
                         -None-
 
-        '''
+        """
         def __init__(self, dataset, solution, mutator, obj_func, status):
                 self.dataset = dataset
                 self.solution = solution
@@ -36,7 +36,7 @@ class SAAlgorithm():
                 self.obj_func = obj_func
                 self.status = status
 
-        '''
+        """
         <func_name>
                 <description>
                 parameters:
@@ -44,7 +44,7 @@ class SAAlgorithm():
                 returns:
                         <description>
 
-        '''
+        """
         def cooling_value(self, alpha, current_c, max_iterat, curr_iter):
                 return alpha * current_c#((max_iterat - curr_iter)/(max_iterat * 1.0)) * current_c
 
