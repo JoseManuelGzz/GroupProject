@@ -17,3 +17,8 @@ mcm_csp.get_solution()
 mcm_ffmsp = SimulationMCM_FFMSP(10,7,5000,range(0,5),0.75,'RandomFlip',0.95,200)
 mcm_ffmsp.get_solution()
 
+ev_csp = SimulationEv_CSP(10,7,5000,range(0,5),0.75,'RandomFlip',10)
+ev_csp.get_solution()
+
+ev_ffmsp = SimulationEv_FFMSP(10,7,5000,range(0,5),0.75,'RandomFlip',10)
+ev_ffmsp.get_solution()
