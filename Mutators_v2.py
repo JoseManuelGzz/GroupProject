@@ -4,7 +4,9 @@ import string
 """
 
 <Mutators>: <Class that contains the different mutating operators
-             as subclasses>
+             as subclasses. Thie first subclass will use a coin flip to determine
+             which elements will be switched. The sucond subclass will simply
+             perfom a random flip of elements in the solution.>
 
 """
 class Mutators:
@@ -23,7 +25,7 @@ class Mutators:
 """
 
 <ExpMutator>: <Mutator subclass that implements the Exponential 
-                mutation>
+                mutation this based on the suggestions of the supervisor>
 
 """
 class ExpMutator(Mutators):
