@@ -29,7 +29,6 @@ class GAlgorithm:
                 returns:
                         -None-
     """
-
     def __init__(self, dataset, solution, mutator, obj_func, status):
         self.dataset = dataset
         self.results = [[]]  
@@ -38,17 +37,16 @@ class GAlgorithm:
         self.obj_func = obj_func
         self.status = status
 
-        """
-        <csp_fit_value>
-                Funciont of csp fit value computation of Genetic Algorithm
-                parameters:
-                        <self> - Pointer to the current object
-                returns:
-                        <fit_value> - List of fit value of each
-                                      sequence in csp objective
-                                      function
-        """
-      
+    """
+    <csp_fit_value>
+            Funciont of csp fit value computation of Genetic Algorithm
+            parameters:
+                    <self> - Pointer to the current object
+            returns:
+                    <fit_value> - List of fit value of each
+                                  sequence in csp objective
+                                  function
+    """
     def csp_fit_value(self):  
         temp1 = self.solution
         data = self.dataset
@@ -58,18 +56,17 @@ class GAlgorithm:
             fit_value.append(fit_value_)
         return fit_value
 
-       """
-       <ffmsp_fit_value>
-                Funciont of ffmsp fit value computation of
-                Genetic Algorithm
-                parameters:
-                        <self> - Pointer to the current object
-                returns:
-                        <fit_value> - List of fit value of each
-                                      sequence in ffmsp objective
-                                      function
-        """
-
+    """
+   <ffmsp_fit_value>
+            Funciont of ffmsp fit value computation of
+            Genetic Algorithm
+            parameters:
+                    <self> - Pointer to the current object
+            returns:
+                    <fit_value> - List of fit value of each
+                                  sequence in ffmsp objective
+                                  function
+    """
     def ffmsp_fit_value(self):  
         temp1 = self.solution
         data = self.dataset
@@ -79,18 +76,17 @@ class GAlgorithm:
             fit_value.append(fit_value_)
         return fit_value
     
-       """
-        <sum>
-                Compute the sum of fit value
-                parameters:
-                        <self> - Pointer to the current object
-                        <fit_value> - List of fit value of each
-                                      sequence in ffmsp objective
-                                      function
-                returns:
-                        <total> - Sum of fit value
-        """
-
+    """
+    <sum>
+            Compute the sum of fit value
+            parameters:
+                    <self> - Pointer to the current object
+                    <fit_value> - List of fit value of each
+                                  sequence in ffmsp objective
+                                  function
+            returns:
+                    <total> - Sum of fit value
+    """
     def sum(self,fit_value):  
         total = 0  
         for i in range(len(fit_value)):  
@@ -108,8 +104,7 @@ class GAlgorithm:
                
                 returns:
                         -None-
-    """"
-    
+    """
     def cumsum(self,fit_value):  
         for i in range(len(fit_value)-2, -1, -1):  
             t = 0  

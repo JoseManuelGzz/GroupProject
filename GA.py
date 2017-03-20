@@ -16,7 +16,7 @@ class GA:
         self.chrom_length = chrom_length
 
     #def print_min_fun(a, b):
-#        return len(filter(lambda x: x >= t, distances))
+    #return len(filter(lambda x: x >= t, distances))
 
 
         

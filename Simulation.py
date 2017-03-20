@@ -4,7 +4,7 @@ from ObjectiveFunction import FFMSPObjectiveFunction
 from Mutators_v2 import ExpMutator
 from Mutators_v2 import RandomFlip
 from SimulatedAnnealing import SAAlgorithm
-from GA import GA
+from GAlgorithm import GAlgorithm
 from Montecarlo import Montecarlo
 from Status import Status
 from Solution import Solution
@@ -255,7 +255,7 @@ class SimulationGA_CSP(Simulation):
         self.chrom_length = chrom_length
         self.min_obj_f = CSPObjectiveFunction()
         self.solution = Solution(self.dataset)
-        self.solution_data = self.solution.get_solution('csp')
+        self.solution_data = self.solution.get_solution(self.rows)
         # WE STILL NEED TO ADD STATUS TO THE GA CONSTRUCTOR AND CLASS
         self.genetic_algorithm = GA(self.data, self.solution_data, self.mutator, self.min_obj_f, self.rows, self.chrom_length)
     """
@@ -298,7 +298,7 @@ class SimulationGAFFMSP(Simulation):
         self.chrom_length = chrom_length
         self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
         self.solution = Solution(self.dataset)
-        self.solution_data = self.solution.get_data('ffmsp')
+        self.solution_data = self.solution.get_data(self.rows)
         # WE STILL NEED TO ADD STATUS TO THE GA CONSTRUCTOR AND CLASS
         self.genetic_algorithm = GA(self.data, self.solution_data, self.mutator, self.max_obj_fm, self.rows, self.chrom_length)
     """
@@ -311,7 +311,7 @@ class SimulationGAFFMSP(Simulation):
                     -NA-
     """
     def get_solution(self):
-        # THIS NEEDS TO BE UPDATED ONCE STATUS HAS BEEN IMPLEMENTED IN GA CLASS
+        # THIS NEEDS TO BE UPDATED ONCE STATUS HAS BEEN IMPLEMENTED IN GA CLASS.
         pass
 """
 
