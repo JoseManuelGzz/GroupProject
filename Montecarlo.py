@@ -94,4 +94,7 @@ class Montecarlo():
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
 
+                # Store the best solution in the corresponding status attribute
+                self.status.best_solution = x
+
                 return self.status
