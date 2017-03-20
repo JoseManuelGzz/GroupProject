@@ -1,9 +1,14 @@
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
 .row.content {
 	height: 1080px;
 }
 
 .sidenav {
-  padding-top: 20px;
+  margin-top: -20px;
   background-color: #f1f1f1;
   height: 100%;
 }

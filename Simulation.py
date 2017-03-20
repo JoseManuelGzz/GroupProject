@@ -332,6 +332,7 @@ class SimulationEv_CSP(Simulation):
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function   
                     <mutator_name> - Name of the mutator to be used
+                    <number_parents> - Number of parents for each element
             returns:
                     -NA-
     """
@@ -371,6 +372,7 @@ class SimulationEv_FFMSP(Simulation):
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function   
                     <mutator_name> - Name of the mutator to be used
+                    <number_parents> - Number of parents for each element
             returns:
                     -NA-
     """
