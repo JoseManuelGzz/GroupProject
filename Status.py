@@ -7,12 +7,17 @@ Status: Class to keep track of performance of the
 import csv
 class Status:
         """
-        <func_name>
-                <description>
+        __init__
+                Constructor for the Status class. The counters to
+                keep track of the parameters in an algorithm simulation
+                run.
                 parameters:
-                        <param-1> - 
+                        max_iter - Maximum number of iterations
+                        num_sequences - number of sequences in the dataset
+                        sequence_length - number of characters in each sequence
+                        alphabet_size - number of possible characters in the sequences
                 returns:
-                        <description>
+                        -None-
 
         """
         def __init__(self, max_iter, num_sequences, sequence_length, alphabet_size):
@@ -31,8 +36,8 @@ class Status:
                 self.solution_record = []
 
         """
-        <func_name>
-                <description>
+        add_iteration
+                Add one iteration to the object's counter for iterations
                 parameters:
                         <param-1> - 
                 returns:
