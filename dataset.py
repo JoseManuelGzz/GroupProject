@@ -5,6 +5,16 @@
 import random
 from collections import Counter
 class Dataset:
+
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def __init__(self, rows=100, cols=10, alphabet=range(0,10)):
         self.rows = rows
         self.alphabet = alphabet
@@ -31,6 +41,15 @@ class Dataset:
             #print(self.most_common_char[i])
             #print("---")
     
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def get_data(self):
         """
         returns a list of lists.

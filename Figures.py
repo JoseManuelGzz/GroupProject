@@ -1,13 +1,35 @@
+"""
+Figures: <Description>
+"""
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 from pandas import DataFrame as df
 
 class Figure:
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def __init__(self, status):
         self.status = status
         self.record = df(status.get_solution_record(), columns=['iteration', 'num_func_calls', 'current_best', 'current_soln'] )
 
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def show_best_result_plot(self,marker="_", marker_size=2):
         #f = plt.figure(1)
         sns_plot = sns.lmplot(self.record.columns[0], self.record.columns[2], data=pd.concat([self.record['iteration'], self.record['current_best']], axis=1),
@@ -22,6 +44,15 @@ class Figure:
         #return sns_plot
 
 
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def save_best_result_plot(self, file_name="best_result.png", marker="_", marker_size=2):
         sns_plot = sns.lmplot(self.record.columns[0], self.record.columns[2], data=pd.concat([self.record['iteration'], self.record['current_best']], axis=1),
                               scatter_kws={"s": marker_size},fit_reg=False, markers=marker )
@@ -33,6 +64,15 @@ class Figure:
         #sns.plt.show()
         #return sns_plot
 
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def show_current_result_plot(self):
         #sns_plot = sns.lmplot(self.record.columns[0], self.record.columns[3], data=pd.concat([self.record['iteration'], self.record['current_soln']], axis=1),     scatter_kws={"s": marker_size}, fit_reg=False, markers=marker)
         sns.set_style("darkgrid")
@@ -42,6 +82,15 @@ class Figure:
         plt.ylabel(self.record.columns[3])
         plt.show()
 
+    """
+        <func_name>
+                <description>
+                parameters:
+                        <param-1> - 
+                returns:
+                        <description>
+
+    """
     def save_current_result_plot(self,file_name="current_result.png"):
         #sns_plot = sns.lmplot(self.record.columns[0], self.record.columns[3], data=pd.concat([self.record['iteration'], self.record['current_soln']], axis=1),     scatter_kws={"s": marker_size}, fit_reg=False, markers=marker)
         sns.set_style("darkgrid")
