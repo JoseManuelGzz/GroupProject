@@ -378,10 +378,10 @@ class SimulationEv_FFMSP(Simulation):
     """
     def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_parents):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
-        self.min_obj_f = FFMSPObjectiveFunction()
+        self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
         self.solution = Solution(self.dataset)
         self.evolutionary = Evolutionary(dataset=self.dataset, mutator=self.mutator, solution=self.solution,
-                                         obj_func=self.min_obj_f, num_parents=number_parents, status=self.status)
+                                         obj_func=self.max_obj_f, num_parents=number_parents, status=self.status)
     """
     <get_solution>
             <Function that runs the Evolutionary algorithm for the FFMSP
