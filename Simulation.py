@@ -9,7 +9,7 @@ from Montecarlo import Montecarlo
 from Status import Status
 from Solution import Solution
 from Evolutionary import Evolutionary
-#from Figures import Figure  
+from Figures import Figure  
 
 """
 
