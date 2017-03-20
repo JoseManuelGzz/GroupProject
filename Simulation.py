@@ -9,7 +9,7 @@ from Montecarlo import Montecarlo
 from Status import Status
 from Solution import Solution
 from Evolutionary import Evolutionary
-#from Figures import Figure  
+from Figures import Figure  
 
 """
 
@@ -202,7 +202,7 @@ class SimulationMCM_FFMSP(Simulation):
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
                     <mutator_name> - Name of the mutator to be used
-                    <alpha> - Cooling value for the temperature 
+                    <alpha> - Cooling value for the temperature
                     <initial_c> - Temperature value        
             returns:
                     -NA-
@@ -245,19 +245,16 @@ class SimulationGA_CSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
-                    <mutator_name> - Name of the mutator to be used
-                    <chrom_length> - Length of the chromosomes     
+                    <mutator_name> - Name of the mutator to be used    
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, chrom_length):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)    
-        self.chrom_length = chrom_length
         self.min_obj_f = CSPObjectiveFunction()
         self.solution = Solution(self.dataset)
-        self.solution_data = self.solution.get_solution(self.rows)
-        # WE STILL NEED TO ADD STATUS TO THE GA CONSTRUCTOR AND CLASS
-        self.genetic_algorithm = GA(self.data, self.solution_data, self.mutator, self.min_obj_f, self.rows, self.chrom_length)
+        self.solution_data = self.solution.get_solutions(self.rows)
+        self.genetic_algorithm = GAlgorithm(self.data, self.solution_data, self.mutator, self.min_obj_f, self.status)
     """
     <get_solution>
             <Function that runs the Genetic algorithm for the CSP
@@ -268,8 +265,8 @@ class SimulationGA_CSP(Simulation):
                     -NA-
     """
     def get_solution(self):
-        # THIS NEEDS TO BE UPDATED ONCE STATUS HAS BEEN IMPLEMENTED IN GA CLASS
-        pass
+        self.status = self.genetic_algorithm.run(self.max_iterations, 0.3)
+        self.status.save_to_file('ga_csp_run.csv')
 """
 
 <SimulationGA_FFMSP>: <This class is used to create an instance and get the solution
@@ -277,7 +274,7 @@ class SimulationGA_CSP(Simulation):
                     from the Simulation Class>
 
 """
-class SimulationGAFFMSP(Simulation):
+class SimulationGA_FFMSP(Simulation):
     """
     <__init__>
             <Constructor of the SimulationGAFFMSP class>
@@ -288,19 +285,16 @@ class SimulationGAFFMSP(Simulation):
                     <max_iterations> - Maximum number of iterations to run the algorithm
                     <alphabet> - Range of characters for the sequences
                     <threshold_proportion> - Constant used for the FFMSP objective function  
-                    <mutator_name> - Name of the mutator to be used
-                    <chrom_length> - Length of the chromosomes     
+                    <mutator_name> - Name of the mutator to be used  
             returns:
                     -NA-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, chrom_length):
-        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)    
-        self.chrom_length = chrom_length
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name):
+        Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)  
         self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
         self.solution = Solution(self.dataset)
-        self.solution_data = self.solution.get_data(self.rows)
-        # WE STILL NEED TO ADD STATUS TO THE GA CONSTRUCTOR AND CLASS
-        self.genetic_algorithm = GA(self.data, self.solution_data, self.mutator, self.max_obj_fm, self.rows, self.chrom_length)
+        self.solution_data = self.solution.get_solutions(self.rows)
+        self.genetic_algorithm = GAlgorithm(self.data, self.solution_data, self.mutator, self.max_obj_f, self.status)
     """
     <get_solution>
             <Function that runs the Genetic algorithm for the FFMSP
@@ -311,8 +305,8 @@ class SimulationGAFFMSP(Simulation):
                     -NA-
     """
     def get_solution(self):
-        # THIS NEEDS TO BE UPDATED ONCE STATUS HAS BEEN IMPLEMENTED IN GA CLASS.
-        pass
+        self.status = self.genetic_algorithm.run(self.max_iterations, 0.3)
+        self.status.save_to_file('ga_ffmsp_run.csv')
 """
 
 <SimulationEv_CSP>: <This class is used to create an instance and get the solution
@@ -378,10 +372,10 @@ class SimulationEv_FFMSP(Simulation):
     """
     def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, number_parents):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
-        self.min_obj_f = FFMSPObjectiveFunction()
+        self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
         self.solution = Solution(self.dataset)
         self.evolutionary = Evolutionary(dataset=self.dataset, mutator=self.mutator, solution=self.solution,
-                                         obj_func=self.min_obj_f, num_parents=number_parents, status=self.status)
+                                         obj_func=self.max_obj_f, num_parents=number_parents, status=self.status)
     """
     <get_solution>
             <Function that runs the Evolutionary algorithm for the FFMSP
@@ -391,6 +385,6 @@ class SimulationEv_FFMSP(Simulation):
             returns:
                     -NA-
     """
-    def get_solution(self):
+    def get_solution(self):     
         self.status = self.evolutionary.run()
         self.status.save_to_file('evo_ffmsp_run.csv')

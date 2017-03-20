@@ -3,32 +3,33 @@ from collections import Counter
 
 """
 
-<Solution>: <Class that creates a solution for the 
+Solution: Class that creates a solution for the 
              string consensus problem for both the 
-             CSP and FFMSP given a dataset>
+             CSP and FFMSP given a dataset
 
 """
 class Solution:
     """
-    <__init__>
-            <Constructor for the Solution class>
+    __init__
+            Constructor for the Solution class
             parameters:
-                    <self> - Pointer to the object
-                    <dataset> - A dataset object with the same 
+                    self - Pointer to the object
+                    dataset - A dataset object with the same 
                                 length sequences as characters 
             returns:
+                    -NA-
     """  
     def __init__(self, dataset):
         self.dataset = dataset
 
     """
-    <get_solution>
-            <Method that returns a solution when using the SA or MCM algorithms.>
+    get_solution
+            Method that returns a solution when using the SA or MCM algorithms.
             parameters:
-                    <self> - Pointer to the object
-                    <solution_type> - String that specifies the problem type, CSP or FFMSP
+                    self - Pointer to the object
+                    solution_type - String that specifies the problem type, CSP or FFMSP
             returns:
-                    <result> - A list of lists with the proposed solution 
+                    result - A list of lists with the proposed solution 
     """    
     def get_solution(self, solution_type):
         if solution_type.lower() == 'csp':
@@ -43,13 +44,13 @@ class Solution:
             return result
 
     """
-    <get_solution>
-            <Method that returns a solution when using the Genetic algorithm.>
+    get_solution
+            Method that returns a solution when using the Genetic algorithm.
             parameters:
-                    <self> - Pointer to the object
-                    <rows> - The number of rows in the dataset
+                    self - Pointer to the object
+                    rows - The number of rows in the dataset
             returns:
-                    <result> - A list of lists with the proposed solution 
+                    result - A list of lists with the proposed solution 
     """  
     def get_solutions(self, rows):
         solutions = [[]]  
