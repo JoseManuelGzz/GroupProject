@@ -3,18 +3,19 @@ Figures: <Description>
 """
 
 import matplotlib.pyplot as plt
+import matplotlib.backends.backend_pdf as mpb
 import seaborn as sns
 import pandas as pd
 from pandas import DataFrame as df
 
 class Figure:
     """
-        <func_name>
-                <description>
+        __init__
+                COnstructor for the Figures class
                 parameters:
-                        <param-1> - 
+                        status - An instance of Status class used to get the plotting data from
                 returns:
-                        <description>
+                        -None-
 
     """
     def __init__(self, status):
@@ -22,12 +23,12 @@ class Figure:
         self.record = df(status.get_solution_record(), columns=['iteration', 'num_func_calls', 'current_best', 'current_soln'] )
 
     """
-        <func_name>
-                <description>
+        show_best_result_plot
+                Draws a trace plot for best result on the y_axis and iterations on the x-axis
                 parameters:
-                        <param-1> - 
+                        marker_size (optional) - To control the size of the trace marker
                 returns:
-                        <description>
+                        -None-
 
     """
     def show_best_result_plot(self,marker="_", marker_size=2):
@@ -45,12 +46,13 @@ class Figure:
 
 
     """
-        <func_name>
-                <description>
+        save_best_result_plot
+                Saves a trace plot for best result on the y_axis and iterations on the x-axis in the given filename
                 parameters:
-                        <param-1> - 
+                        file_name (optional) - File name where the chart should be saved, if none provided then chart saved in a file "best_result.png"
+                        marker_size (optional) - To control the size of the trace marker
                 returns:
-                        <description>
+                        -None-
 
     """
     def save_best_result_plot(self, file_name="best_result.png", marker="_", marker_size=2):
@@ -65,12 +67,12 @@ class Figure:
         #return sns_plot
 
     """
-        <func_name>
-                <description>
+        show_current_result_plot
+                Draws a trace plot for current_result on the y_axis and iterations on the x-axis
                 parameters:
-                        <param-1> - 
+                        marker_size (optional) - To control the size of the trace marker
                 returns:
-                        <description>
+                        -None-
 
     """
     def show_current_result_plot(self):
@@ -83,12 +85,13 @@ class Figure:
         plt.show()
 
     """
-        <func_name>
-                <description>
+        save_current_result_plot
+                Saves a trace plot for current_result on the y_axis and iterations on the x-axis in the given filename
                 parameters:
-                        <param-1> - 
+                        file_name (optional) - File name where the chart should be saved, if none provided then chart saved in a file "current_result.png"
+                        marker_size (optional) - To control the size of the trace marker
                 returns:
-                        <description>
+                        -None-
 
     """
     def save_current_result_plot(self,file_name="current_result.png"):
@@ -100,3 +103,19 @@ class Figure:
         plt.ylabel(self.record.columns[3])
         plt.savefig(file_name)
         #plt.show()
+
+    """
+            save_multiple_plots
+                    Saves multiple plots the given filename (has to be a pdf type)
+                    parameters:
+                            file_name  - PDF file name where the chart should be saved
+                            figures - An iterator containing objects of the type Figure
+                    returns:
+                            -None-
+
+        """
+    def save_multiple_plots(self, filename_pdf, figures):
+        pdf = mpb.PdfPages(filename_pdf)
+        for figure in figures:
+            pdf.savefig(figure)
+        pdf.close()

@@ -7,7 +7,21 @@ import numpy
 import operator
 
 class Evolutionary:
+    """
+            _init_
+                    Constructor for the Evolutionary class
+                    parameters:
+                            dataset - An instance of Dataset class
+                            solution - An instance of Solution class
+                            mutator - An instance of Mutator class
+                            obj_func - An instance of ObjectiveFunction class
+                            status - An instance of Status class
+                            num_parents - Number of parents in the original Solution
 
+                    returns:
+                            -None-
+
+    """
     def __init__(self, dataset, solution, mutator, obj_func, status, num_parents=6):
         self.dataset = dataset
         self.data = dataset.get_data()
@@ -22,7 +36,18 @@ class Evolutionary:
         self.num_parents = num_parents
         self.set_initial_population()
 
+    """
+                set_initial_population
+                        Generates the initial population of parents for running the evolutionary algorithm
+                        Called from inside the constructor only.
+                        Uses the alphabet from the Dataset instance to generate the individual parents
+                        parameters:
+                                -None-
 
+                        returns:
+                                -None-
+
+    """
     def set_initial_population(self):
         alphabet_per_column = self.dataset.get_alphabet_per_column()
         print(len(alphabet_per_column))
@@ -36,7 +61,17 @@ class Evolutionary:
             #self.solutions.append([numpy.random.choice(alphabet_per_column[i], replace=True) for _ in range(self.dataset.get_cols())])
             #self.solutions.append(numpy.random.choice(alphabet_per_column[i], replace=True, size=self.dataset.get_cols()) )
 
-    def run(self, prob_mutation=0.3):
+    """
+                run()
+                        Runs the evolutionary algorithm instance for the given objective function
+                        parameters:
+                                -None-
+
+                        returns:
+                                An instance of Status class with details of the iterations and the scores
+
+        """
+    def run(self):
         iterations = 0
         max_iter = self.status.get_max_iterations()
         
