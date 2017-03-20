@@ -129,7 +129,7 @@ class GAlgorithm:
     def mutation(self, probability_of_mutation):  
         solution_length = len(self.solution)  
         for i in range(solution_length): 
-	    self.mutator.use_random_flip_2(self.solution[i], probability_of_mutation)  
+	    self.mutator.mutate(self.solution[i])  
 		
         """
         <selection>
@@ -226,8 +226,8 @@ class GAlgorithm:
         #probability_of_mutation = 0.01            
         fit_value = []
         self.status.add_function_calls()
-	self.status.set_iterations_value_ga(iterations)
-	self.status.set_probability_of_mutation_ga(probability_of_mutation)
+	#self.status.set_iterations_value_ga(iterations)
+	#self.status.set_probability_of_mutation_ga(probability_of_mutation)
 	###################
 	print("------------1----")
 	print("Dataset: ")
