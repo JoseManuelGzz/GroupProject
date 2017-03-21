@@ -95,6 +95,8 @@ class Evolutionary:
             #combined_population = self.merge_two_dicts(parent_result,child_result)
             combined_population = parent_result + child_result
             sorted_combined = sorted(combined_population, key=lambda x:x[1]) #returns a list of tuples, key is the first part of tuple and score is the second
+            child_sorted = sorted(child_result, key=lambda x: x[1])
+            current_child_best_score = child_sorted[0][1]
             #print sorted_combined
             current_score = sorted_combined[0][1]
             if  current_score < best_score:
@@ -104,7 +106,7 @@ class Evolutionary:
             self.solutions = list(solutions)
             parent_result=[]
             child_result=[]
-            current_entry = [iterations, self.status.get_function_calls(), best_score, current_score]
+            current_entry = [iterations, self.status.get_function_calls(), best_score, current_child_best_score]
             self.status.add_solution_record_entry(current_entry)
             #print self.solutions
 
