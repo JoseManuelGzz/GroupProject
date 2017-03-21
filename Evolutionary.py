@@ -111,6 +111,9 @@ class Evolutionary:
         print("Best solution:")
         print(best_solution)
 
+        if best_score < 0:
+            best_score *= -1
+
         print("Best score:")
         print(best_score)
 
