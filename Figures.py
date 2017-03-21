@@ -7,6 +7,9 @@ import matplotlib.backends.backend_pdf as mpb
 import seaborn as sns
 import pandas as pd
 from pandas import DataFrame as df
+from bokeh.plotting import figure, output_file, show
+from bokeh.layouts import gridplot
+
 
 class Figure:
     """
@@ -119,3 +122,54 @@ class Figure:
         for figure in figures:
             pdf.savefig(figure)
         pdf.close()
+
+    """
+                get_best_result_plot_html
+                        Private function for getting a bokeh figure object for best_solution
+                        parameters:
+                                marker_size: Parameter for the line width of the chart, default value: 2
+                        returns:
+                                An instance of figure from the Bokeh library
+
+            """
+
+    def get_best_result_plot_html(self, marker_size=2):
+        p = figure(title="Best_result", x_axis_label=self.record.columns[0], y_axis_label=self.record.columns[2])
+        p.line(self.record['iteration'], self.record['current_best'], legend=self.record.columns[2], line_width=marker_size)
+
+        return p
+
+    """
+                    get_current_result_plot_html
+                            Private function for getting a bokeh figure object for current_solution
+                            parameters:
+                                    marker_size: Parameter for the line width of the chart, default value: 2
+                            returns:
+                                    An instance of figure from the Bokeh library
+
+                """
+
+    def get_current_result_plot_bokeh(self, marker_size=2):
+        p = figure(title="Current_result", x_axis_label=self.record.columns[0], y_axis_label=self.record.columns[3])
+        p.line(self.record['iteration'], self.record['current_soln'], legend=self.record.columns[3], line_width=marker_size)
+        return p
+
+    """
+                    save_multiple_plots_bokeh
+                            Function for saving multiple charts in a grid layout using the Bokeh library
+                            parameters:
+                                    filename_html: The name of the html file where results should be saved
+                                    figures: A list of figures of the type Bokeh.figure
+
+                            Side effect:
+                                    Displays the charts and saves them in the given file name. File overwritten if already present.
+                            returns:
+                                    -None-
+
+                """
+
+    def save_multiple_plots_bokeh(self, filename_html, figures):
+        # pdf = matplotlib.backends.backend_pdf.PdfPages(filename_pdf)
+        output_file(filename_html)
+        p = gridplot([figures], toolbar_location=None)
+        show(p)
