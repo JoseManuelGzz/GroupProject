@@ -64,7 +64,8 @@ status.save_to_file('ffmsp_run.csv')
 
 """
 #figure = Figure(status)
-#figure.show_best_result_plot()
+fig1 = figure.get_best_result_plot()
+
 #figure.save_best_result_plot("best_result.png")
 #figure.show_current_result_plot()
 #figure.save_current_result_plot("current_result.png")

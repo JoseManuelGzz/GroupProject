@@ -17,7 +17,7 @@ class Solution:
                     dataset - A dataset object with the same 
                                 length sequences as characters 
             returns:
-                    -NA-
+                    -None-
     """  
     def __init__(self, dataset):
         self.dataset = dataset
@@ -44,7 +44,7 @@ class Solution:
             return result
 
     """
-    get_solution
+    get_solutions
             Method that returns a solution when using the Genetic algorithm.
             parameters:
                     self - Pointer to the object

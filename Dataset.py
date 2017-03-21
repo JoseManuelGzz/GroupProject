@@ -1,9 +1,16 @@
+"""
+
+Dataset: Class that generates random sequences for the simulation of
+            a problem instance.
+
+"""
+
 import random
 from collections import Counter
 class Dataset:
     """
             __init__
-                    COnstructor for the Dataset class
+                    Constructor for the Dataset class
                     parameters:
                             rows:  size of the dataset (number of sequences)
                             cols: size of each sequence - columns
@@ -28,14 +35,14 @@ class Dataset:
             self.most_common_char.append(Counter(column).most_common(1)[0][0])
 
     """
-            get_data
-                    Get data from dataset
-                    parameters:
-                            None
-                    returns:
-                            self.d --> (data from the dataset)
+        get_data
+                Get data from dataset
+                parameters:
+                        None
+                returns:
+                        self.d --> (data from the dataset)
 
-        """
+    """
     def get_data(self):
         """
         returns a list of lists.
@@ -47,50 +54,50 @@ class Dataset:
         return self.d
 
     """
-            get_most_common_char_column
-                    returns most common character from a column
-                    parameters:
-                            -None-
-                    returns:
-                            self.most_common_char --> (Most common character from the columns, it is a sequence of the length self.cols)
+        get_most_common_char_column
+                returns most common character from a column
+                parameters:
+                        -None-
+                returns:
+                        self.most_common_char --> (Most common character from the columns, it is a sequence of the length self.cols)
 
-        """
+    """
     def get_most_common_char_column(self):
         return self.most_common_char
 
     """
-                get_alphabet_per_column
-                        returns all characters used in a column
-                        parameters:
-                                -None-
-                        returns:
-                                self.alphabet_per_column --> (All characters from the columns, returned as list of lists)
+        get_alphabet_per_column
+                returns all characters used in a column
+                parameters:
+                        -None-
+                returns:
+                        self.alphabet_per_column --> (All characters from the columns, returned as list of lists)
 
-     """
+    """
     def get_alphabet_per_column(self):
         return self.alphabet_per_column
 
     """
-                    get_cols
-                            returns no of columns in a dataset
-                            parameters:
-                                    -None-
-                            returns:
-                                    self.cols
+        get_cols
+                returns no of columns in a dataset
+                parameters:
+                        -None-
+                returns:
+                        self.cols
 
     """
     def get_cols(self):
         return self.cols
 
     """
-                        get_alphabet
-                                returns alphabet used in the dataset
-                                parameters:
-                                        -None-
-                                returns:
-                                        self.alphabet
+        get_alphabet
+                returns alphabet used in the dataset
+                parameters:
+                        -None-
+                returns:
+                        self.alphabet
 
-        """
+    """
     def get_alphabet(self):
         return self.alphabet
 

@@ -108,15 +108,15 @@ class Figure:
         #plt.show()
 
     """
-            save_multiple_plots
-                    Saves multiple plots the given filename (has to be a pdf type)
-                    parameters:
-                            file_name  - PDF file name where the chart should be saved
-                            figures - An iterator containing objects of the type Figure
-                    returns:
-                            -None-
+        save_multiple_plots
+                Saves multiple plots the given filename (has to be a pdf type)
+                parameters:
+                        file_name  - PDF file name where the chart should be saved
+                        figures - An iterator containing objects of the type Figure
+                returns:
+                        -None-
 
-        """
+    """
     def save_multiple_plots(self, filename_pdf, figures):
         pdf = mpb.PdfPages(filename_pdf)
         for figure in figures:

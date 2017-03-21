@@ -116,8 +116,9 @@ class GAlgorithm:
             fit_value[len(fit_value)-1] = 1
 
         """
-        <func_name>
-                <description>
+        mutation
+                Mutate the attribute solution for a number of times
+                equivalent to its length
                 parameters:
                         <self> - Pointer to the current object
                         <probability_of_mutation> - Mutation probability
@@ -129,7 +130,7 @@ class GAlgorithm:
     def mutation(self, probability_of_mutation):  
         solution_length = len(self.solution)  
         for i in range(solution_length): 
-	    self.mutator.mutate(self.solution[i])  
+	       self.mutator.mutate(self.solution[i])  
 		
         """
         <selection>
@@ -170,7 +171,7 @@ class GAlgorithm:
         self.solution = newsolution
 
         """
-        <func_name>
+        crossover
                 population of parents compulate
                 parameters:
                         <self> - Pointer to the current object

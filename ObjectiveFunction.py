@@ -1,5 +1,7 @@
 """
-Class ObjectiveFunction: Functions for Minimisation and Maximisation
+ObjectiveFunction: Class that implements functions 
+                    for minimisation in the context of String Consensus
+                    Problems
 """
 
 class ObjectiveFunction(object):
@@ -33,7 +35,7 @@ class ObjectiveFunction(object):
         return result
 
 """
-Class FFMSPObjectiveFunction: To determine how far a string is from
+FFMSPObjectiveFunction: To determine how far a string is from
             a set of sequences (Extends ObjectiveFunction)
 """
 class FFMSPObjectiveFunction(ObjectiveFunction):
@@ -58,7 +60,7 @@ class FFMSPObjectiveFunction(ObjectiveFunction):
         return -1 * len(filter(lambda x: x >= self.threshold, distances))
 
 """
-Class CSPObjectiveFunction: To determine how close a string is from 
+CSPObjectiveFunction: To determine how close a string is from 
     a set of sequences (Extends ObjectiveFunction)
 """
 class CSPObjectiveFunction(ObjectiveFunction):

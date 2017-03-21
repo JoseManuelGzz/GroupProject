@@ -1,3 +1,9 @@
+"""
+
+Evolutionary: 
+
+"""
+
 from Mutator import Mutator
 #import matplotlib.pyplot as plt  
 import math 
@@ -37,15 +43,15 @@ class Evolutionary:
         self.set_initial_population()
 
     """
-                set_initial_population
-                        Generates the initial population of parents for running the evolutionary algorithm
-                        Called from inside the constructor only.
-                        Uses the alphabet from the Dataset instance to generate the individual parents
-                        parameters:
-                                -None-
+        set_initial_population
+                Generates the initial population of parents for running the evolutionary algorithm
+                Called from inside the constructor only.
+                Uses the alphabet from the Dataset instance to generate the individual parents
+                parameters:
+                        -None-
 
-                        returns:
-                                -None-
+                returns:
+                        -None-
 
     """
     def set_initial_population(self):
@@ -62,15 +68,15 @@ class Evolutionary:
             #self.solutions.append(numpy.random.choice(alphabet_per_column[i], replace=True, size=self.dataset.get_cols()) )
 
     """
-                run()
-                        Runs the evolutionary algorithm instance for the given objective function
-                        parameters:
-                                -None-
+        run()
+                Runs the evolutionary algorithm instance for the given objective function
+                parameters:
+                        -None-
 
-                        returns:
-                                An instance of Status class with details of the iterations and the scores
+                returns:
+                        An instance of Status class with details of the iterations and the scores
 
-        """
+    """
     def run(self):
         iterations = 0
         max_iter = self.status.get_max_iterations()

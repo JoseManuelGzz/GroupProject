@@ -3,23 +3,23 @@ import math as m
 
 """
 
-<Montecarlo>: <Class that implements the Montecarlo Metropolis optimization
-                Algorithm for String Consensus problems>
+Montecarlo: Class that implements the Montecarlo Metropolis optimization
+                Algorithm for String Consensus problems
 
 """
 class Montecarlo():
         """
-        <__init__>
-                <Constructor of the Montecarlo class>
+        __init__
+                Constructor of the Montecarlo class
                 parameters:
-                        <self> - Pointer to the object
-                        <dataset> - A copy of the dataset object already initialised
-                        <solution> - A copy of the solution object already initialised
-                        <mutator> - A copy of the mutator object to be used
-                        <obj_func> - A copy of the objective function object to be used
-                        <status> - A copy of the status object where the results will be stored
+                        self - Pointer to the object
+                        dataset - A copy of the dataset object already initialised
+                        solution - A copy of the solution object already initialised
+                        mutator - A copy of the mutator object to be used
+                        obj_func - A copy of the objective function object to be used
+                        status - A copy of the status object where the results will be stored
                 returns:
-                        -NA-
+                        -None-
         """
         def __init__(self, dataset, solution, mutator, obj_func, status):
                 self.dataset = dataset
@@ -28,16 +28,16 @@ class Montecarlo():
                 self.obj_func = obj_func
                 self.status = status
         """
-        <run>
-                <Method that gets the solution for the string consensus problem
+        run
+                Method that gets the solution for the string consensus problem
                 with all the parameters used to create the object, and prints 
-                the results>
+                the results
                 parameters:
-                        <self> - Pointer to the object
-                        <alpha> - Cooling value for the temperature
-                        <initial_c> - Initial value of the temperature
+                        self - Pointer to the object
+                        alpha - Cooling value for the temperature
+                        initial_c - Initial value of the temperature
                 returns:
-                        -NA-
+                        -None-
         """
         def run(self, alpha, initial_c):
                 iterations = 0

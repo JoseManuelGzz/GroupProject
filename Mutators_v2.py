@@ -3,55 +3,55 @@ import string
 
 """
 
-<Mutators>: <Class that contains the different mutating operators
+Mutators: Class that contains the different mutating operators
              as subclasses. Thie first subclass will use a coin flip to determine
              which elements will be switched. The sucond subclass will simply
-             perfom a random flip of elements in the solution.>
+             perfom a random flip of elements in the solution.
 
 """
 class Mutators:
     """
-    <__init__>
-            <Constructor of the parent Mutators class>
+    __init__
+            Constructor of the parent Mutators class
             parameters:
-                    <self> - Pointer to the object
-                    <dataset> - A copy of the dataset object
+                    self - Pointer to the object
+                    dataset - A copy of the dataset object
             returns:
-                    -NA-
+                    -None-
     """
     def __init__(self, dataset):
         self.dataset = dataset
 
 """
 
-<ExpMutator>: <Mutator subclass that implements the Exponential 
-                mutation this based on the suggestions of the supervisor>
+ExpMutator: Mutator subclass that implements the Exponential 
+                mutation this based on the suggestions of the supervisor
 
 """
 class ExpMutator(Mutators):
     """
-    <__init__>
-            <Constructor of the Exponential mutator subclass>
+    __init__
+            Constructor of the Exponential mutator subclass
             parameters:
-                    <self> - Pointer to the object
-                    <dataset> - A copy of the dataset object
-                    <prob> - Probability of mutation
+                    self - Pointer to the object
+                    dataset - A copy of the dataset object
+                    prob - Probability of mutation
             returns:
-                    -NA-
+                    -None-
     """
     def __init__(self, dataset, prob):
         self.dataset = dataset
         self.prob = prob
     
     """
-    <mutate>
-            <Method that implements the exponential mutation on the 
-             current solution to the problem>
+    mutate
+            Method that implements the exponential mutation on the 
+             current solution to the problem
             parameters:
-                    <self> - Pointer to the object
-                    <solution> - A list with the current solution to the problem
+                    self - Pointer to the object
+                    solution - A list with the current solution to the problem
             returns:
-                    <solution> - An updated list with the solution after undergoing mutation
+                    solution - An updated list with the solution after undergoing mutation
     """
     def mutate(self, solution):
         i = random.randint(0, len(solution)-1)
@@ -76,34 +76,34 @@ class ExpMutator(Mutators):
 
 """
 
-<RandomFlip>: <Mutator subclass that implements the Random Flip 
-                mutation>
+RandomFlip: Mutator subclass that implements the Random Flip 
+                mutation
 
 """
 class RandomFlip(Mutators):
     """
-    <__init__>
-            <Constructor of the Random Flip mutator subclass>
+    __init__
+            Constructor of the Random Flip mutator subclass
             parameters:
-                    <self> - Pointer to the object
-                    <dataset> - A copy of the dataset object
-                    <prob> - Probability of mutation
+                    self - Pointer to the object
+                    dataset - A copy of the dataset object
+                    prob - Probability of mutation
             returns:
-                    -NA-
+                    -None-
     """
     def __init__(self, dataset, prob):
         self.dataset = dataset
         self.prob = prob
     
     """
-    <mutate>
-            <Method that implements the random flip mutation on the 
-             current solution to the problem>
+    mutate
+            Method that implements the random flip mutation on the 
+             current solution to the problem
             parameters:
-                    <self> - Pointer to the object
-                    <solution> - A list with the current solution to the problem
+                    self - Pointer to the object
+                    solution - A list with the current solution to the problem
             returns:
-                    <solution> - An updated list with the solution after undergoing mutation
+                    solution - An updated list with the solution after undergoing mutation
     """
     def mutate(self, solution):
         i = 0

@@ -17,7 +17,7 @@ class Status:
                         sequence_length - number of characters in each sequence
                         alphabet_size - number of possible characters in the sequences
                 returns:
-                        -NA-
+                        -None-
 
         """
         def __init__(self, max_iter, num_sequences, sequence_length, alphabet_size):
