@@ -108,7 +108,7 @@ class Evolutionary:
             self.status.add_solution_record_entry(current_entry)
             #print self.solutions
 
-
+        self.status.set_best_solution(best_solution)
         return self.status
 
              
