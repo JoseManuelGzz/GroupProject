@@ -50,8 +50,8 @@ class Evolutionary:
     """
     def set_initial_population(self):
         alphabet_per_column = self.dataset.get_alphabet_per_column()
-        #print(len(alphabet_per_column))
-        #print(len(alphabet_per_column[0]))
+        print(len(alphabet_per_column))
+        print(len(alphabet_per_column[0]))
         for i in range(self.num_parents):
             a = []
             for j in range(self.dataset.get_cols()):
@@ -108,11 +108,6 @@ class Evolutionary:
             self.status.add_solution_record_entry(current_entry)
             #print self.solutions
 
-        print("Best solution:")
-        print(best_solution)
-
-        print("Best score:")
-        print(best_score)
 
         return self.status
 
