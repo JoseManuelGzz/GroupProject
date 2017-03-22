@@ -268,7 +268,7 @@ class GAlgorithm:
             self.selection(fit_value)      
             #self.crossover(probability_of_crossover)     
             self.mutation(probability_of_mutation)
-            current_entry = [i, self.status.get_function_calls(), prev_fit, best_fit]
+            current_entry = [i, self.status.get_function_calls(), 11-prev_fit, 11-best_fit]
             print("Prev: " + str(prev_fit))
             print("Best: " + str(best_fit))
             self.status.add_solution_record_entry(current_entry)
@@ -280,9 +280,9 @@ class GAlgorithm:
         #print self.results
         print("Result: ")
         print("   Solution: ")
-        print self.results[0][1]
+        print(best_individual)
         print("   Evaluation: ")
-        print(self.results[0][0])
+        print(11-best_fit)
         #print self.results[0]
         return self.status
 
@@ -304,9 +304,7 @@ class GAlgorithm:
         #probability_of_mutation = 0.01            
         fit_value = []       
         self.status.add_function_calls()
-        self.status.set_iterations_value_ga(iterations)
-        self.status.set_probability_of_mutation_ga(probability_of_mutation)
-	###################
+    	###################
 	#print("------------1----")
 	#print("Dataset: ")
         #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
