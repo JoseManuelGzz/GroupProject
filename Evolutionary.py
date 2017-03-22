@@ -4,7 +4,6 @@ Evolutionary:
 
 """
 
-from Mutator import Mutator
 #import matplotlib.pyplot as plt  
 import math 
 import random

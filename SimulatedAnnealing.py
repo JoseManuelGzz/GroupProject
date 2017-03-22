@@ -124,5 +124,7 @@ class SAAlgorithm():
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
 
+                self.status.best_solution = x
+
                 return self.status
 
