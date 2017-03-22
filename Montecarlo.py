@@ -84,10 +84,6 @@ class Montecarlo():
                                         x = x_temp
                                         y = y_temp
 
-                # Change the sign of for the FFMSP solution. 
-                if y < 0:
-                        y *= -1
-
                 # Print the results
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))

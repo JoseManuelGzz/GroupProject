@@ -120,10 +120,6 @@ class SAAlgorithm():
                         if c > 0.1:
                                 c = self.cooling_value(alpha, c)
 
-                #Change the sign for the FFMSP solution
-                if y < 0:
-                        y *= -1
-
                 #Print the results
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
