@@ -52,7 +52,7 @@ class GAlgorithm:
         data = self.dataset
         fit_value = []
         for i in range(len(temp1)):  
-            fit_value_ = 11 - self.obj_func.evaluate(data,temp1[i])
+            fit_value_ = (len(self.solution)+1) - self.obj_func.evaluate(data,temp1[i])
             fit_value.append(fit_value_)
         return fit_value
 
@@ -72,7 +72,7 @@ class GAlgorithm:
         data = self.dataset
         fit_value = []
         for i in range(len(temp1)):
-            fit_value_ = self.obj_func.evaluate(data,temp1[i])
+            fit_value_ = (len(self.solution)+1) - self.obj_func.evaluate(data,temp1[i])
             fit_value.append(fit_value_)
         return fit_value
     
@@ -264,25 +264,21 @@ class GAlgorithm:
             self.status.add_iteration()
             fit_value = self.csp_fit_value()             
             best_individual, best_fit = self.best(fit_value)
-            self.results.append([11-best_fit, best_individual]) 
             self.selection(fit_value)      
             #self.crossover(probability_of_crossover)     
             self.mutation(probability_of_mutation)
-            current_entry = [i, self.status.get_function_calls(), 11-prev_fit, 11-best_fit]
-            print("Prev: " + str(prev_fit))
-            print("Best: " + str(best_fit))
+            current_entry = [i, self.status.get_function_calls(), (len(self.solution)+1)-prev_fit, (len(self.solution)+1)-best_fit]
             self.status.add_solution_record_entry(current_entry)
             prev_fit = best_fit
 	###################
-        self.results = self.results[1:]  
-        self.results.sort()
+
         #self.status.add_solution_record_entry(self.results)
         #print self.results
         print("Result: ")
         print("   Solution: ")
         print(best_individual)
         print("   Evaluation: ")
-        print(11-best_fit)
+        print((len(self.solution)+1)-best_fit)
         #print self.results[0]
         return self.status
 
@@ -333,23 +329,27 @@ class GAlgorithm:
 
 
 	###################
+        prev_fit = 0
         for i in range(iterations):  
+            self.status.add_iteration()
             fit_value = self.ffmsp_fit_value()             
             best_individual, best_fit = self.best(fit_value)
             #self.results.append([best_fit, best_individual]) 
             self.selection(fit_value)      
             #self.crossover(probability_of_crossover)     
             self.mutation(probability_of_mutation)
+            current_entry = [i, self.status.get_function_calls(), (len(self.solution)+1)-prev_fit, (len(self.solution)+1)-best_fit]
+            self.status.add_solution_record_entry(current_entry)
+            prev_fit = best_fit
         
 	###################
-        self.results = self.results[1:]  
-        self.results.sort()
+
         self.status.add_solution_record_entry(self.results)
         #print self.results
         print("Result: ")
     	print("   Solution: ")
-        print(self.results[0][1])
+        print(best_individual)
         print("   Evaluation: ")
-        print(self.results[0][0])
+        print((len(self.solution)+1)-best_fit)
         #print self.results[0]
         return self.status
