@@ -282,8 +282,6 @@ class GAlgorithm:
             self.status.add_solution_record_entry(current_entry)
             prev_fit = best_fit
 
-        self.status.add_solution_record_entry(self.results)
-
         print("Result: ")
     	print("   Solution: ")
         print(best_individual)
