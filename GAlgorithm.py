@@ -230,31 +230,31 @@ class GAlgorithm:
 	#self.status.set_iterations_value_ga(iterations)
 	#self.status.set_probability_of_mutation_ga(probability_of_mutation)
 	###################
-	print("------------1----")
-	print("Dataset: ")
-        print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+	#print("------------1----")
+	#print("Dataset: ")
+        #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
 	#print(self.dataset)
              
 	
 	
 	###################
-	print("------------2----")
-	print("Initial Solutions")
-	print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.solution]))
+	#print("------------2----")
+	#print("Initial Solutions")
+	#print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.solution]))
 
 	###################
-	print("------------3----")
+	#print("------------3----")
 	fit_value0 = self.csp_fit_value()
 	best_individual, best_fit = self.best(fit_value0)
-	print("Best initial solution: ")
-	print(best_individual)
-	print("Evaluation of best solution: ")
-	print(11 - best_fit)
+	#print("Best initial solution: ")
+	#print(best_individual)
+	#print("Evaluation of best solution: ")
+	#print(11 - best_fit)
 
 	###################
-	print("------------4----")
-        print("Iterations: ")
-	print(iterations)
+	#print("------------4----")
+        #print("Iterations: ")
+	#print(iterations)
 
 
 
@@ -301,30 +301,30 @@ class GAlgorithm:
 	self.status.set_iterations_value_ga(iterations)
 	self.status.set_probability_of_mutation_ga(probability_of_mutation)
 	###################
-	print("------------1----")
-	print("Dataset: ")
-        print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+	#print("------------1----")
+	#print("Dataset: ")
+        #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
              
 	
 	
 	###################
-	print("------------2----")
-	print("Initial Solutions")
-	print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
+	#print("------------2----")
+	#print("Initial Solutions")
+	#print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
 
 	###################
-	print("------------3----")
+	#print("------------3----")
 	fit_value = self.ffmsp_fit_value()
 	best_individual, best_fit = self.best(fit_value)
-	print("Best initial solution: ")
-	print(best_individual)
-	print("Evaluation of best solution: ")
-	print(best_fit)
+	#print("Best initial solution: ")
+	#print(best_individual)
+	#print("Evaluation of best solution: ")
+	#print(best_fit)
 
 	###################
-	print("------------4----")
-        print("Iterations: ")
-	print(iterations)
+	#print("------------4----")
+        #print("Iterations: ")
+	#print(iterations)
 
 
 

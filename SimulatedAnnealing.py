@@ -118,7 +118,7 @@ class SAAlgorithm():
 
 
                         if c > 0.1:
-                                c = self.cooling_value(alpha, c, max_iter, iterations)
+                                c = self.cooling_value(alpha, c)
 
                 #Change the sign for the FFMSP solution
                 if y < 0:

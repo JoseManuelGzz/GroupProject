@@ -6,9 +6,14 @@ from Simulation import SimulationEv_CSP
 from Simulation import SimulationEv_FFMSP
 from Simulation import SimulationGA_CSP
 from Simulation import SimulationGA_FFMSP
+from Figures import Figure
 
 sa_csp = SimulationSA_CSP(10,7,5000,range(0,5),0.75,'RandomFlip', 0.95,200)
 sa_csp.get_solution()
+sa_csp_figure = Figure(sa_csp.status)
+sa_csp_fig1 = sa_csp_figure.get_best_result_plot_html()
+sa_csp_fig2 = sa_csp_figure.get_current_result_plot_bokeh()
+sa_csp_figure.save_multiple_plots_bokeh("sa_csp.html",[sa_csp_fig1,sa_csp_fig2])
 
 sa_ffmsp = SimulationSA_FFMSP(10,7,5000,range(0,5),0.75,'RandomFlip', 0.95,200)
 sa_ffmsp.get_solution()
@@ -30,3 +35,6 @@ ga_csp.get_solution()
 
 ga_ffmsp = SimulationGA_FFMSP(10,7,5000,range(0,5),0.75,'RandomFlip')
 ga_ffmsp.get_solution()
+
+
+
