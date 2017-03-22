@@ -38,15 +38,31 @@ mcm_ffmsp_figure.save_multiple_plots_bokeh("mcm_ffmsp.html",[mcm_ffmsp_fig1,mcm_
 
 ev_csp = SimulationEv_CSP(10,7,5000,range(0,5),0.75,'RandomFlip',10)
 ev_csp.get_solution()
+ev_csp_figure = Figure(ev_csp.status)
+ev_csp_fig1 = ev_csp_figure.get_best_result_plot_html()
+ev_csp_fig2 = ev_csp_figure.get_current_result_plot_bokeh()
+ev_csp_figure.save_multiple_plots_bokeh("ev_csp.html",[ev_csp_fig1,ev_csp_fig2])
 
 ev_ffmsp = SimulationEv_FFMSP(10,7,5000,range(0,5),0.75,'RandomFlip',10)
 ev_ffmsp.get_solution()
+ev_ffmsp_figure = Figure(ev_ffmsp.status)
+ev_ffmsp_fig1 = ev_ffmsp_figure.get_best_result_plot_html()
+ev_ffmsp_fig2 = ev_ffmsp_figure.get_current_result_plot_bokeh()
+ev_ffmsp_figure.save_multiple_plots_bokeh("ev_ffmsp.html",[ev_ffmsp_fig1,ev_ffmsp_fig2])
 
 ga_csp = SimulationGA_CSP(10,7,5000,range(0,5,),0.75,'RandomFlip')
 ga_csp.get_solution()
+ga_csp_figure = Figure(ga_csp.status)
+ga_csp_fig1 = ga_csp_figure.get_best_result_plot_html()
+ga_csp_fig2 = ga_csp_figure.get_current_result_plot_bokeh()
+ga_csp_figure.save_multiple_plots_bokeh("ga_csp.html",[ga_csp_fig1,ga_csp_fig2])
 
 ga_ffmsp = SimulationGA_FFMSP(10,7,5000,range(0,5),0.75,'RandomFlip')
 ga_ffmsp.get_solution()
+ga_ffmsp_figure = Figure(ga_ffmsp.status)
+ga_ffmsp_fig1 = ga_ffmsp_figure.get_best_result_plot_html()
+ga_ffmsp_fig2 = ga_ffmsp_figure.get_current_result_plot_bokeh()
+ga_ffmsp_figure.save_multiple_plots_bokeh("ga_ffmsp.html",[ga_ffmsp_fig1,ga_ffmsp_fig2])
 
 
 
