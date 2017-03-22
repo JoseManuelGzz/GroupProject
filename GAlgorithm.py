@@ -244,8 +244,8 @@ class GAlgorithm:
 
 	###################
 	#print("------------3----")
-	fit_value0 = self.csp_fit_value()
-	best_individual, best_fit = self.best(fit_value0)
+        fit_value0 = self.csp_fit_value()
+        best_individual, best_fit = self.best(fit_value0)
 	#print("Best initial solution: ")
 	#print(best_individual)
 	#print("Evaluation of best solution: ")
@@ -260,6 +260,7 @@ class GAlgorithm:
 
 	###################
         for i in range(iterations):  
+            self.status.add_iteration()
             fit_value = self.csp_fit_value()             
             best_individual, best_fit = self.best(fit_value)
             self.results.append([11-best_fit, best_individual]) 
@@ -268,17 +269,17 @@ class GAlgorithm:
             self.mutation(probability_of_mutation)
         
 	###################
-  	self.results = self.results[1:]  
+        self.results = self.results[1:]  
         self.results.sort()
         self.status.add_solution_record_entry(self.results)
         #print self.results
-	print("Result: ")
-	print("   Solution: ")
-	print self.results[0][1]
-	print("   Evaluation: ")
-	print(self.results[0][0])
+        print("Result: ")
+        print("   Solution: ")
+        print self.results[0][1]
+        print("   Evaluation: ")
+        print(self.results[0][0])
         #print self.results[0]
-	return self.status
+        return self.status
 
         """
         <run_ffmsp>
@@ -297,9 +298,9 @@ class GAlgorithm:
         #probability_of_crossover = 0.3           
         #probability_of_mutation = 0.01            
         fit_value = []       
-	self.status.add_function_calls()
-	self.status.set_iterations_value_ga(iterations)
-	self.status.set_probability_of_mutation_ga(probability_of_mutation)
+        self.status.add_function_calls()
+        self.status.set_iterations_value_ga(iterations)
+        self.status.set_probability_of_mutation_ga(probability_of_mutation)
 	###################
 	#print("------------1----")
 	#print("Dataset: ")
@@ -314,8 +315,8 @@ class GAlgorithm:
 
 	###################
 	#print("------------3----")
-	fit_value = self.ffmsp_fit_value()
-	best_individual, best_fit = self.best(fit_value)
+        fit_value = self.ffmsp_fit_value()
+        best_individual, best_fit = self.best(fit_value)
 	#print("Best initial solution: ")
 	#print(best_individual)
 	#print("Evaluation of best solution: ")
@@ -338,14 +339,14 @@ class GAlgorithm:
             self.mutation(probability_of_mutation)
         
 	###################
-  	self.results = self.results[1:]  
+        self.results = self.results[1:]  
         self.results.sort()
         self.status.add_solution_record_entry(self.results)
         #print self.results
-	print("Result: ")
-	print("   Solution: ")
-	print(self.results[0][1])
-	print("   Evaluation: ")
-	print(self.results[0][0])
+        print("Result: ")
+    	print("   Solution: ")
+        print(self.results[0][1])
+        print("   Evaluation: ")
+        print(self.results[0][0])
         #print self.results[0]
-	return self.status
+        return self.status
