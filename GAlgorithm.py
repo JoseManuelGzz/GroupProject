@@ -223,63 +223,29 @@ class GAlgorithm:
         """
 
     def run(self, iterations, probability_of_mutation = 0.1):    
-        #probability_of_crossover = 0.3           
-        #probability_of_mutation = 0.01            
+        
         fit_value = []
         self.status.add_function_calls()
-	#self.status.set_iterations_value_ga(iterations)
-	#self.status.set_probability_of_mutation_ga(probability_of_mutation)
-	###################
-	#print("------------1----")
-	#print("Dataset: ")
-        #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
-	#print(self.dataset)
-             
-	
-	
-	###################
-	#print("------------2----")
-	#print("Initial Solutions")
-	#print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.solution]))
 
-	###################
-	#print("------------3----")
         fit_value0 = self.csp_fit_value()
         best_individual, best_fit = self.best(fit_value0)
-	#print("Best initial solution: ")
-	#print(best_individual)
-	#print("Evaluation of best solution: ")
-	#print(11 - best_fit)
 
-	###################
-	#print("------------4----")
-        #print("Iterations: ")
-	#print(iterations)
-
-
-
-	###################
         prev_fit = 0
         for i in range(iterations):  
             self.status.add_iteration()
             fit_value = self.csp_fit_value()             
             best_individual, best_fit = self.best(fit_value)
-            self.selection(fit_value)      
-            #self.crossover(probability_of_crossover)     
+            self.selection(fit_value)        
             self.mutation(probability_of_mutation)
             current_entry = [i, self.status.get_function_calls(), (len(self.solution)+1)-prev_fit, (len(self.solution)+1)-best_fit]
             self.status.add_solution_record_entry(current_entry)
             prev_fit = best_fit
-	###################
 
-        #self.status.add_solution_record_entry(self.results)
-        #print self.results
         print("Result: ")
         print("   Solution: ")
         print(best_individual)
         print("   Evaluation: ")
         print((len(self.solution)+1)-best_fit)
-        #print self.results[0]
         return self.status
 
         """
@@ -296,39 +262,13 @@ class GAlgorithm:
         """
 
     def run_ffmsp(self, iterations, probability_of_mutation = 0.1):     
-        #probability_of_crossover = 0.3           
-        #probability_of_mutation = 0.01            
+     
         fit_value = []       
         self.status.add_function_calls()
-    	###################
-	#print("------------1----")
-	#print("Dataset: ")
-        #print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
-             
-	
-	
-	###################
-	#print("------------2----")
-	#print("Initial Solutions")
-	#print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in self.dataset]))
 
-	###################
-	#print("------------3----")
         fit_value = self.ffmsp_fit_value()
         best_individual, best_fit = self.best(fit_value)
-	#print("Best initial solution: ")
-	#print(best_individual)
-	#print("Evaluation of best solution: ")
-	#print(best_fit)
 
-	###################
-	#print("------------4----")
-        #print("Iterations: ")
-	#print(iterations)
-
-
-
-	###################
         prev_fit = 0
         for i in range(iterations):  
             self.status.add_iteration()
@@ -341,15 +281,13 @@ class GAlgorithm:
             current_entry = [i, self.status.get_function_calls(), (len(self.solution)+1)-prev_fit, (len(self.solution)+1)-best_fit]
             self.status.add_solution_record_entry(current_entry)
             prev_fit = best_fit
-        
-	###################
 
         self.status.add_solution_record_entry(self.results)
-        #print self.results
+
         print("Result: ")
     	print("   Solution: ")
         print(best_individual)
         print("   Evaluation: ")
         print((len(self.solution)+1)-best_fit)
-        #print self.results[0]
+
         return self.status
