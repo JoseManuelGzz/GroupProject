@@ -259,6 +259,7 @@ class GAlgorithm:
 
 
 	###################
+        prev_fit = 0
         for i in range(iterations):  
             self.status.add_iteration()
             fit_value = self.csp_fit_value()             
@@ -267,11 +268,15 @@ class GAlgorithm:
             self.selection(fit_value)      
             #self.crossover(probability_of_crossover)     
             self.mutation(probability_of_mutation)
-        
+            current_entry = [i, self.status.get_function_calls(), prev_fit, best_fit]
+            print("Prev: " + str(prev_fit))
+            print("Best: " + str(best_fit))
+            self.status.add_solution_record_entry(current_entry)
+            prev_fit = best_fit
 	###################
         self.results = self.results[1:]  
         self.results.sort()
-        self.status.add_solution_record_entry(self.results)
+        #self.status.add_solution_record_entry(self.results)
         #print self.results
         print("Result: ")
         print("   Solution: ")

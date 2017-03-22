@@ -301,7 +301,7 @@ class SimulationGA_FFMSP(Simulation):
                     -None-
     """
     def get_solution(self):
-        self.status = self.genetic_algorithm.run(self.max_iterations, 0.3)
+        self.status = self.genetic_algorithm.run_ffmsp(self.max_iterations, 0.3)
         self.status.save_to_file('ga_ffmsp_run.csv')
 """
 
