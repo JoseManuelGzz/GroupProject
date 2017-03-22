@@ -34,16 +34,14 @@ class Montecarlo():
                 the results
                 parameters:
                         self - Pointer to the object
-                        alpha - Cooling value for the temperature
                         initial_c - Initial value of the temperature
                 returns:
                         -None-
         """
-        def run(self, alpha, initial_c):
+        def run(self, initial_c):
                 iterations = 0
                 max_iter = self.status.get_max_iterations()
 
-                self.status.set_alpha_value_sa(alpha)
 
                 #Add mutator operator
                 x = self.solution

@@ -157,14 +157,12 @@ class SimulationMCM_CSP(Simulation):
                     alphabet - Range of characters for the sequences
                     threshold_proportion - Constant used for the FFMSP objective function  
                     mutator_name - Name of the mutator to be used
-                    alpha - Cooling value for the temperature 
                     initial_c - Temperature value        
             returns:
                     -None-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, alpha, initial_c):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, initial_c):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
-        self.alpha = alpha
         self.initial_c = initial_c
         self.min_obj_f = CSPObjectiveFunction()
         self.solution = Solution(self.dataset)
@@ -180,7 +178,7 @@ class SimulationMCM_CSP(Simulation):
                     -None-
     """
     def get_solution(self):
-        self.status = self.montecarlo_metropolis.run(self.alpha, self.initial_c)
+        self.status = self.montecarlo_metropolis.run(self.initial_c)
         self.status.save_to_file('mcm_csp_run.csv')
 
 """
@@ -202,14 +200,12 @@ class SimulationMCM_FFMSP(Simulation):
                     alphabet - Range of characters for the sequences
                     threshold_proportion - Constant used for the FFMSP objective function  
                     mutator_name - Name of the mutator to be used
-                    alpha - Cooling value for the temperature
                     initial_c - Temperature value        
             returns:
                     -None-
     """
-    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, alpha, initial_c):
+    def __init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name, initial_c):
         Simulation.__init__(self, columns, rows, max_iterations, alphabet, threshold_proportion, mutator_name)
-        self.alpha = alpha
         self.initial_c = initial_c
         self.max_obj_f = FFMSPObjectiveFunction(threshold_proportion * self.columns)
         self.solution = Solution(self.dataset)
@@ -225,7 +221,7 @@ class SimulationMCM_FFMSP(Simulation):
                     -None-
     """
     def get_solution(self):
-        self.status = self.montecarlo_metropolis.run(self.alpha, self.initial_c)
+        self.status = self.montecarlo_metropolis.run(self.initial_c)
         self.status.save_to_file('mcm_ffmsp_run.csv')
 """
 
