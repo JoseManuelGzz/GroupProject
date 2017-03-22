@@ -1,5 +1,6 @@
 import math 
 import random
+import time
 
 """
 GAlgorithm: Class that implements the Genetic Algorithm
@@ -223,7 +224,7 @@ class GAlgorithm:
         """
 
     def run(self, iterations, probability_of_mutation = 0.1):    
-        
+        start = time.time()
         fit_value = []
         self.status.add_function_calls()
 
@@ -241,11 +242,17 @@ class GAlgorithm:
             self.status.add_solution_record_entry(current_entry)
             prev_fit = best_fit
 
+        end = time.time()
+
         print("Result: ")
         print("   Solution: ")
         print(best_individual)
         print("   Evaluation: ")
         print((len(self.solution)+1)-best_fit)
+
+        self.status.set_best_solution(best_individual)
+        self.status.set_elapsed_time(end-start)
+
         return self.status
 
         """
@@ -262,6 +269,8 @@ class GAlgorithm:
         """
 
     def run_ffmsp(self, iterations, probability_of_mutation = 0.1):     
+
+        start = time.time()
      
         fit_value = []       
         self.status.add_function_calls()
@@ -282,10 +291,15 @@ class GAlgorithm:
             self.status.add_solution_record_entry(current_entry)
             prev_fit = best_fit
 
+        end = time.time()
+
         print("Result: ")
     	print("   Solution: ")
         print(best_individual)
         print("   Evaluation: ")
         print((len(self.solution)+1)-best_fit)
+
+        self.status.set_best_solution(best_individual)
+        self.status.set_elapsed_time(end-start)
 
         return self.status

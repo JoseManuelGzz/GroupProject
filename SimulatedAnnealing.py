@@ -1,5 +1,6 @@
 import random as r
 import math as m
+import time 
 
 """
 SAAlgorithm: Class that implements the Simulated Annealing optimization
@@ -66,6 +67,7 @@ class SAAlgorithm():
 
         """
         def run(self, alpha, initial_c):
+                start = time.time()
                 iterations = 0
                 max_iter = self.status.get_max_iterations()
 
@@ -120,11 +122,13 @@ class SAAlgorithm():
                         if c > 0.1:
                                 c = self.cooling_value(alpha, c)
 
+                end = time.time()
                 #Print the results
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
 
-                self.status.best_solution = x
+                self.status.set_best_solution(x)
+                self.status.set_elapsed_time(end-start)
 
                 return self.status
 

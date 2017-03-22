@@ -8,6 +8,7 @@ Evolutionary:
 import math 
 import random
 import numpy
+import time
 #from Dataset import Dataset
 import operator
 
@@ -77,6 +78,7 @@ class Evolutionary:
 
     """
     def run(self):
+        start = time.time()
         iterations = 0
         max_iter = self.status.get_max_iterations()
         
@@ -115,11 +117,16 @@ class Evolutionary:
             self.status.add_solution_record_entry(current_entry)
             #print self.solutions
 
+        end = time.time()
+
         print("Best solution:")
         print(best_solution)
 
         print("Best score:")
         print(best_score)
+
+        self.status.set_best_solution(best_solution)
+        self.status.set_elapsed_time(end-start)
 
         return self.status
 

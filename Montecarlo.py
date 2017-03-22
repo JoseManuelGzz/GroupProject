@@ -1,5 +1,6 @@
 import random as r
 import math as m
+import time
 
 """
 
@@ -39,6 +40,7 @@ class Montecarlo():
                         -None-
         """
         def run(self, initial_c):
+                start = time.time()
                 iterations = 0
                 max_iter = self.status.get_max_iterations()
 
@@ -84,11 +86,13 @@ class Montecarlo():
                                         x = x_temp
                                         y = y_temp
 
+                end = time.time()
                 # Print the results
                 print("The Global Minimum value calculated after " + str(iterations) + " iterations is")
                 print("x = " + str(x) + " and y = " + str(y))
 
                 # Store the best solution in the corresponding status attribute
-                self.status.best_solution = x
+                self.status.set_best_solution(x)
+                self.status.set_elapsed_time(end-start)
 
                 return self.status
