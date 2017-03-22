@@ -131,6 +131,20 @@ class Status:
                 self.elapsed_time = elapsed_time
 
         """
+        get_elapsed_time
+                Function that enables the user to retrieve the time
+                        that an algorithm takes to run completely
+                parameters:
+                        -None- 
+                returns:
+                        elapsed_time - numeric value representing the number of
+                                elapsed from start to finish
+
+        """
+        def get_elapsed_time(self):
+                return self.elapsed_time
+
+        """
         get_function_calls
                 retrieve the number of cuntion calls  in the current status object
                 parameters:
