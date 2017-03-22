@@ -92,6 +92,7 @@ class SimulationSA_CSP(Simulation):
     def get_solution(self):
         self.status = self.simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_csp_run.csv')
+        return self.status
 
 """
 
@@ -137,6 +138,7 @@ class SimulationSA_FFMSP(Simulation):
     def get_solution(self):
         self.status = self.simulated_annealing.run(self.alpha, self.initial_c)
         self.status.save_to_file('sa_ffmsp_run.csv')
+        return self.status
 
 """
 
@@ -180,6 +182,7 @@ class SimulationMCM_CSP(Simulation):
     def get_solution(self):
         self.status = self.montecarlo_metropolis.run(self.initial_c)
         self.status.save_to_file('mcm_csp_run.csv')
+        return self.status
 
 """
 
@@ -223,6 +226,7 @@ class SimulationMCM_FFMSP(Simulation):
     def get_solution(self):
         self.status = self.montecarlo_metropolis.run(self.initial_c)
         self.status.save_to_file('mcm_ffmsp_run.csv')
+        return self.status
 """
 
 SimulationGA_CSP: This class is used to create an instance and get the solution
@@ -263,6 +267,7 @@ class SimulationGA_CSP(Simulation):
     def get_solution(self):
         self.status = self.genetic_algorithm.run(self.max_iterations, 0.3)
         self.status.save_to_file('ga_csp_run.csv')
+        return self.status
 """
 
 SimulationGA_FFMSP: This class is used to create an instance and get the solution
@@ -303,6 +308,7 @@ class SimulationGA_FFMSP(Simulation):
     def get_solution(self):
         self.status = self.genetic_algorithm.run_ffmsp(self.max_iterations, 0.3)
         self.status.save_to_file('ga_ffmsp_run.csv')
+        return self.status
 """
 
 SimulationEv_CSP: This class is used to create an instance and get the solution
@@ -343,6 +349,7 @@ class SimulationEv_CSP(Simulation):
     def get_solution(self):
         self.status = self.evolutionary.run()
         self.status.save_to_file('evo_csp_run.csv')
+        return self.status
 """
 
 SimulationEv_FFMSP: This class is used to create an instance and get the solution
@@ -384,3 +391,4 @@ class SimulationEv_FFMSP(Simulation):
     def get_solution(self):     
         self.status = self.evolutionary.run()
         self.status.save_to_file('evo_ffmsp_run.csv')
+        return self.status
