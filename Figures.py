@@ -128,6 +128,7 @@ class Figure:
                         Private function for getting a bokeh figure object for best_solution
                         parameters:
                                 marker_size: Parameter for the line width of the chart, default value: 2
+                                opt_title : Optional - used to add name of parameter, if using with multiple plots
                         returns:
                                 An instance of figure from the Bokeh library
 
