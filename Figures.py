@@ -133,8 +133,8 @@ class Figure:
 
             """
 
-    def get_best_result_plot_html(self, marker_size=2):
-        p = figure(title="Best_result", x_axis_label=self.record.columns[0], y_axis_label=self.record.columns[2])
+    def get_best_result_plot_html(self, marker_size=2, opt_title=''):
+        p = figure(title="Best_result"+opt_title, x_axis_label=self.record.columns[0], y_axis_label=self.record.columns[2])
         p.line(self.record['iteration'], self.record['current_best'], legend=self.record.columns[2], line_width=marker_size)
 
         return p
@@ -171,5 +171,5 @@ class Figure:
     def save_multiple_plots_bokeh(self, filename_html, figures):
         # pdf = matplotlib.backends.backend_pdf.PdfPages(filename_pdf)
         output_file(filename_html)
-        p = gridplot([figures], toolbar_location=None)
+        p = gridplot(figures, toolbar_location=None, ncols=2, plot_width=250, plot_height=250)
         show(p)

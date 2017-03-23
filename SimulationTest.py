@@ -8,6 +8,8 @@ from Simulation import SimulationGA_CSP
 from Simulation import SimulationGA_FFMSP
 from Figures import Figure
 
+"""
+
 sa_csp = SimulationSA_CSP(10,7,5000,range(0,5),0.75,'RandomFlip', 0.95,200)
 sa_csp.get_solution()
 sa_csp_figure = Figure(sa_csp.status)
@@ -63,6 +65,14 @@ ga_ffmsp_figure = Figure(ga_ffmsp.status)
 ga_ffmsp_fig1 = ga_ffmsp_figure.get_best_result_plot_html()
 ga_ffmsp_fig2 = ga_ffmsp_figure.get_current_result_plot_bokeh()
 ga_ffmsp_figure.save_multiple_plots_bokeh("ga_ffmsp.html",[ga_ffmsp_fig1,ga_ffmsp_fig2])
+"""
+param_figs = []
+parents=range(20,32,2)
+for num_parent in parents:
+    sim = SimulationEv_CSP(100,7,5000,range(0,5),0.75,'RandomFlip',number_parents=num_parent)
+    sim.get_solution()
+    sim_figure = Figure(sim.status)
+    param_figs.append(sim_figure.get_best_result_plot_html(opt_title=' num_parent=' + str(num_parent)))
 
 
-
+sim_figure.save_multiple_plots_bokeh("multi_param_charts.html",param_figs)
